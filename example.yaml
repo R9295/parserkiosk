@@ -1,0 +1,21 @@
+---
+  # COMPARE FUNCTIONS
+  compare_functions:
+    - compare_hash
+    - compare_string
+    - compare_dict
+    - compare_file
+  tests:
+    test_serialization:
+      test_foo:
+          input:
+            type: "file"
+            arg: "a.json"
+          expect:
+            func: "compare_dict"
+            arg: "{\"foo\": 1234}"
+      test_bar:
+          input:
+            type: "raw"
+            arg: "{\"foo\": \".1234\"}"
+          expect: "fail"
