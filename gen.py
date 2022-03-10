@@ -10,7 +10,7 @@ except ImportError:
 import argparse
 
 
-def generate_tests(tests, test_type):
+def generate_tests(tests, test_type, compare_funcs):
     template = None
     with open('templates/python.jinja2', 'r') as template_file:
         template = jinja2.Template(template_file.read())
@@ -19,6 +19,7 @@ def generate_tests(tests, test_type):
             template.render(
                 tests=tests,
                 test_func=f'{test_type}_FUNC',
+                compare_funcs=compare_funcs,
             )
         )
 
@@ -27,10 +28,13 @@ def generate(filename):
     with open(filename, 'r') as file:
         content = Box(load_yaml(file.read(), Loader=YamlLoader))
     tests = content.tests
+    compare_funcs = content.compare_functions
     if tests.get('test_de_serialization'):
-        generate_tests(tests.test_de_serialization, 'DE_SERIALIZE')
+        generate_tests(
+            tests.test_de_serialization, 'DE_SERIALIZE', compare_funcs
+        )
     if tests.get('test_serialization'):
-        generate_tests(tests.test_serialization, 'SERIALIZE')
+        generate_tests(tests.test_serialization, 'SERIALIZE', compare_funcs)
 
 
 if __name__ == '__main__':

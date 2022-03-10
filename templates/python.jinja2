@@ -1,4 +1,8 @@
-from commons import *
+from commons import (
+    {% for func in compare_funcs -%}
+    {{ func }},
+    {% endfor -%}
+)
 
 # assign me
 {{ test_func }} = None
