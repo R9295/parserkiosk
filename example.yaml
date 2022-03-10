@@ -22,4 +22,4 @@
             arg: "{\"foo\": \".1234\"}"
           assert:
             func: "fail"
-            arg: "Cannot start a float with a dot"
+            arg: "\"Cannot start a float with a dot\""
