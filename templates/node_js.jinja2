@@ -1,0 +1,13 @@
+import {
+    {% for func in compare_funcs -%}
+    {{ func }},
+    {% endfor -%}
+} from './commons';
+
+const {{ test_func }} = null;
+
+{%- for t_name, t in tests.items() %}
+
+export const {{ t_name }} = () => {
+}
+{% endfor %}

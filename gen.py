@@ -12,9 +12,9 @@ import argparse
 
 def generate_tests(tests, test_type, compare_funcs):
     template = None
-    with open('templates/python.jinja2', 'r') as template_file:
+    with open('templates/node_js.jinja2', 'r') as template_file:
         template = jinja2.Template(template_file.read())
-    with open(f'tests/test_{test_type.lower()}.py', 'w') as test_file:
+    with open(f'tests/test_{test_type.lower()}.js', 'w') as test_file:
         test_file.write(
             template.render(
                 tests=tests,
