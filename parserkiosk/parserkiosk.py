@@ -1,6 +1,6 @@
+import jinja2
 from box import Box
 from yaml import load as load_yaml
-import jinja2
 
 try:
     from yaml import CLoader as YamlLoader
@@ -35,6 +35,7 @@ def generate(filename):
         )
     if tests.get('test_serialization'):
         generate_tests(tests.test_serialization, 'SERIALIZE', compare_funcs)
+
 
 def main():
     parser = argparse.ArgumentParser(description='Generator')
