@@ -36,8 +36,7 @@ def generate(filename):
     if tests.get('test_serialization'):
         generate_tests(tests.test_serialization, 'SERIALIZE', compare_funcs)
 
-
-if __name__ == '__main__':
+def main():
     parser = argparse.ArgumentParser(description='Generator')
     parser.add_argument(
         'filename', action='store', help='Your .yaml file describing tests'
