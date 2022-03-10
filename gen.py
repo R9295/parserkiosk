@@ -1,7 +1,6 @@
 from box import Box
 from yaml import load as load_yaml
-
-from backends import PythonBackend
+import jinja2
 
 try:
     from yaml import CLoader as YamlLoader
@@ -12,12 +11,16 @@ import argparse
 
 
 def generate_tests(tests, test_type):
-    with PythonBackend(
-        filename=f'test_{test_type.lower()}', test_type=test_type
-    ) as backend:
-        backend.initialize_test_file()
-        for test_name, test_dict in tests.items():
-            backend.parse_test(test_name, test_dict)
+    template = None
+    with open('templates/python.jinja2', 'r') as template_file:
+        template = jinja2.Template(template_file.read())
+    with open(f'tests/test_{test_type.lower()}.py', 'w') as test_file:
+        test_file.write(
+            template.render(
+                tests=tests,
+                test_func=f'{test_type}_FUNC',
+            )
+        )
 
 
 def generate(filename):

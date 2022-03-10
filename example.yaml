@@ -11,11 +11,13 @@
           input:
             type: "file"
             arg: "a.json"
-          expect:
+          assert:
             func: "compare_dict"
             arg: "{\"foo\": 1234}"
       test_bar:
           input:
             type: "raw"
             arg: "{\"foo\": \".1234\"}"
-          expect: "fail"
+          assert:
+            func: "fail"
+            arg: "Cannot start a float with a dot"
