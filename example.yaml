@@ -23,3 +23,12 @@
           assert:
             func: "fail"
             arg: "\"Cannot start a float with a dot\""
+    test_de_serialization:
+      test_asdf:
+        info: "Placeholder"
+        input:
+          type: "raw"
+          arg: "{\"foo\": \".1234\"}"
+        assert:
+          func: "compare_hash"
+          arg: "\"sha256:asdf......\""
