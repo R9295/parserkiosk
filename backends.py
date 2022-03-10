@@ -1,15 +1,15 @@
 from contextlib import AbstractContextManager
+from typing import Literal, Union
+
+TEST_TYPES = Union[Literal['DE_SERIALIZE'], Literal['SERIALIZE']]
 
 
 class PythonBackend(AbstractContextManager):
-    def __init__(self, filename, test_type=None):
+    def __init__(self, filename, test_type: TEST_TYPES):
         self.ext = 'py'
         self.test_type = test_type
-        self.func = (
-            'DE_SERIALIZE_FUNCTION'
-            if test_type == 'de_serialization'
-            else 'SERIALIZE_FUNCTION'
-        )
+        self.func = f'{test_type}_FUNCTION'
+        # TODO: handle error
         self.file = open(f'tests/{filename}.{self.ext}', 'w')
         self.fixture_dir = 'fixtures'
 
@@ -19,7 +19,7 @@ class PythonBackend(AbstractContextManager):
     def __exit__(self, *args, **kwargs):
         self.file.close()
 
-    def initialize(self):
+    def initialize_test_file(self):
         self.write('from commons import *')
         self.write('')
         self.write(f'{self.func} = None')
@@ -29,7 +29,7 @@ class PythonBackend(AbstractContextManager):
     def write(self, content, newline=True, indent: int = 0):
         if indent:
             for i in range(indent):
-                self.file.write('\t')
+                self.file.write('    ')
         self.file.write(content)
         if newline:
             self.file.write('\n')

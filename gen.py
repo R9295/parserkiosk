@@ -1,32 +1,33 @@
 from box import Box
-from yaml import load
+from yaml import load as load_yaml
+
 from backends import PythonBackend
 
 try:
-    from yaml import CLoader as Loader
+    from yaml import CLoader as YamlLoader
 except ImportError:
-    from yaml import Loader
+    from yaml import Loader as YamlLoader
 
 import argparse
 
 
 def generate_tests(tests, test_type):
     with PythonBackend(
-        filename=f'test_{test_type}', test_type=test_type
+        filename=f'test_{test_type.lower()}', test_type=test_type
     ) as backend:
-        backend.initialize()
-        for k, v in tests.items():
-            backend.parse_test(k, v)
+        backend.initialize_test_file()
+        for test_name, test_dict in tests.items():
+            backend.parse_test(test_name, test_dict)
 
 
 def generate(filename):
     with open(filename, 'r') as file:
-        content = Box(load(file.read(), Loader=Loader))
+        content = Box(load_yaml(file.read(), Loader=YamlLoader))
     tests = content.tests
     if tests.get('test_de_serialization'):
-        generate_tests(tests.test_de_serialization, 'de_serialization')
+        generate_tests(tests.test_de_serialization, 'DE_SERIALIZE')
     if tests.get('test_serialization'):
-        generate_tests(tests.test_serialization, 'serialization')
+        generate_tests(tests.test_serialization, 'SERIALIZE')
 
 
 if __name__ == '__main__':
