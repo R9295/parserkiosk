@@ -8,6 +8,7 @@ const {{ test_func }} = null;
 
 {%- for t_name, t in tests.items() %}
 
-export const {{ t_name }} = () => {
-}
+test('{{t.info}}', () => {
+    
+})
 {% endfor %}

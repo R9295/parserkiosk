@@ -8,6 +8,7 @@
   tests:
     test_serialization:
       test_foo:
+          info: "Describe the test here"
           input:
             type: "file"
             arg: "a.json"
@@ -15,6 +16,7 @@
             func: "compare_dict"
             arg: "{\"foo\": 1234}"
       test_bar:
+          info: "Raw power"
           input:
             type: "raw"
             arg: "{\"foo\": \".1234\"}"

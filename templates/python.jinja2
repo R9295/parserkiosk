@@ -9,6 +9,9 @@ from commons import (
 
 {% for test_name, test_dict in tests.items() %}
 def {{test_name}}():
+    '''
+    {{test_dict.info}}
+    '''
     {%- if test_dict.input.type == "file" %}
     data = None
     with open('fixtures/{{test_dict.input.arg}}', 'r') as file:
