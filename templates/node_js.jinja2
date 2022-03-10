@@ -16,8 +16,8 @@ test('{{t.info}}', () => {
     {%- endif %}
     {% if t.assert.func != "fail" -%}
     serialized_data = {{test_func}}(data)
-    expect({{ t.assert.func }}(serialized_data, {{ t.assert.arg }}).toBe(true)
-    {% else -%}
+    expect({{ t.assert.func }}(serialized_data, {{ t.assert.arg }})).toBe(true)
+    {%- else -%}
     try {
         serialized_data = {{ test_func }}(data)
         fail("Expected an error, but didn't get")
