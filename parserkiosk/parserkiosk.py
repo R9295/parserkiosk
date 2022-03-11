@@ -56,10 +56,15 @@ def validate_cli_args(args):
     elif not args.builtin and not args.path:
         raise Exception('Need a template to generate a test-suite.')
     if args.path and not args.ext:
-        raise Exception('Need an --ext parameter when using a custom template.')
+        raise Exception(
+            'Need an --ext parameter when using a custom template.'
+        )
+
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description='''Generate test suites for parsers in multiple languages.''')
+    parser = argparse.ArgumentParser(
+        description='''Generate test suites for parsers in multiple languages.'''
+    )
     parser.add_argument(
         'filename', action='store', help='Your .yaml file describing tests.'
     )
@@ -85,7 +90,7 @@ def main() -> None:
     tests, compare_funcs = read_yaml(args.filename)
     try:
         validate_cli_args(args)
-        ext = args.ext if args.ext else get_ext(args.builtin)    
+        ext = args.ext if args.ext else get_ext(args.builtin)
     except Exception as e:
         print_error(e)
         return
@@ -94,18 +99,18 @@ def main() -> None:
     )
     if tests.get('test_de_serialization'):
         generate_test(
-                tests.test_de_serialization,
-                'DE_SERIALIZE',
-                compare_funcs,
-                template,
-                ext,
-            )
+            tests.test_de_serialization,
+            'DE_SERIALIZE',
+            compare_funcs,
+            template,
+            ext,
+        )
     if tests.get('test_serialization'):
         generate_test(
-                tests.test_serialization,
-                'SERIALIZE',
-                compare_funcs,
-                template,
-                ext,
-            )
+            tests.test_serialization,
+            'SERIALIZE',
+            compare_funcs,
+            template,
+            ext,
+        )
     print_success('Done')

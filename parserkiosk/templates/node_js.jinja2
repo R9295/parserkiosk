@@ -22,7 +22,9 @@ test('{{t.info}}', () => {
         serialized_data = {{ test_func }}(data)
         fail("Expected an error, but didn't get")
     } catch(e){
+        {%- if t.assert.get('arg') != None %}
         expect(e.toString()).toBe({{t.assert.arg}})
+        {% endif %}
     }
     {%- endif %}
 })
