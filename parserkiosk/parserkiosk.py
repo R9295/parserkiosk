@@ -30,7 +30,7 @@ def get_ext(template_name):
         case 'python':
             return 'py'
         case _:
-            return None
+            raise Exception(f'Unsupported builtin template "{template_name}".')
 
 
 def generate_test(tests, test_type, compare_funcs, template, ext):
@@ -50,16 +50,24 @@ def read_yaml(filename):
     return content.tests, content.compare_functions
 
 
-def main():
-    parser = argparse.ArgumentParser(description='Generator')
+def validate_cli_args(args):
+    if args.builtin and args.path:
+        raise Exception('Cannot generate two test-suites at a time.')
+    elif not args.builtin and not args.path:
+        raise Exception('Need a template to generate a test-suite.')
+    if args.path and not args.ext:
+        raise Exception('Need an --ext parameter when using a custom template.')
+
+def main() -> None:
+    parser = argparse.ArgumentParser(description='''Generate test suites for parsers in multiple languages.''')
     parser.add_argument(
-        'filename', action='store', help='Your .yaml file describing tests'
+        'filename', action='store', help='Your .yaml file describing tests.'
     )
     parser.add_argument(
         '--path',
         action='store',
         required=False,
-        help='Use the built-in template for Python (pytest)',
+        help='Path to your custom jinja2 template.',
     )
     parser.add_argument(
         '--ext',
@@ -71,36 +79,33 @@ def main():
         '--builtin',
         action='store',
         required=False,
-        help='Use the built-in templates: pytest(Python), jest(Node.JS)',
+        help='Use a built-in templates: python(Python/pytest), node_js(Node.JS/jest).',
     )
     args = parser.parse_args()
     tests, compare_funcs = read_yaml(args.filename)
-    if args.builtin and args.path:
-        print_error('Cannot generate two test-suites at a time!')
-    elif not args.builtin and not args.path:
-        print_error('Need a template to generate a test-suite')
-    else:
-        template = get_template(
-            args.builtin or args.path, args.builtin is not None
-        )
-        ext = get_ext(args.builtin) or args.ext
-        if not ext:
-            print_error('Need an --ext parameter when using custom templates!')
-        else:
-            if tests.get('test_de_serialization'):
-                generate_test(
-                    tests.test_de_serialization,
-                    'DE_SERIALIZE',
-                    compare_funcs,
-                    template,
-                    ext,
-                )
-            if tests.get('test_serialization'):
-                generate_test(
-                    tests.test_serialization,
-                    'SERIALIZE',
-                    compare_funcs,
-                    template,
-                    ext,
-                )
-            print_success('Done')
+    try:
+        validate_cli_args(args)
+        ext = args.ext if args.ext else get_ext(args.builtin)    
+    except Exception as e:
+        print_error(e)
+        return
+    template = get_template(
+        args.builtin or args.path, args.builtin is not None
+    )
+    if tests.get('test_de_serialization'):
+        generate_test(
+                tests.test_de_serialization,
+                'DE_SERIALIZE',
+                compare_funcs,
+                template,
+                ext,
+            )
+    if tests.get('test_serialization'):
+        generate_test(
+                tests.test_serialization,
+                'SERIALIZE',
+                compare_funcs,
+                template,
+                ext,
+            )
+    print_success('Done')
