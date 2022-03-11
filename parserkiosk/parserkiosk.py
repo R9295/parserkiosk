@@ -1,7 +1,10 @@
+from importlib import resources as pkg_resources
+
 import jinja2
 from box import Box
 from yaml import load as load_yaml
-from importlib import resources as pkg_resources
+
+from .colors import print_error, print_success
 
 try:
     from yaml import CLoader as YamlLoader
@@ -73,16 +76,16 @@ def main():
     args = parser.parse_args()
     tests, compare_funcs = read_yaml(args.filename)
     if args.builtin and args.path:
-        print('Cannot generate two test-suites at a time!')
+        print_error('Cannot generate two test-suites at a time!')
     elif not args.builtin and not args.path:
-        print('Need a template to generate a test-suite')
+        print_error('Need a template to generate a test-suite')
     else:
         template = get_template(
             args.builtin or args.path, args.builtin is not None
         )
         ext = get_ext(args.builtin) or args.ext
         if not ext:
-            print('Need an --ext parameter when using custom templates!')
+            print_error('Need an --ext parameter when using custom templates!')
         else:
             if tests.get('test_de_serialization'):
                 generate_test(
@@ -100,3 +103,4 @@ def main():
                     template,
                     ext,
                 )
+            print_success('Done')
