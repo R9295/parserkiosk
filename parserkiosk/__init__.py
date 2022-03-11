@@ -1,3 +1,5 @@
-from .parserkiosk import main
+from . import parserkiosk, templates
 
-__all__ = ["main"]
+main = parserkiosk.main
+
+__all__ = ["main", "templates"]
