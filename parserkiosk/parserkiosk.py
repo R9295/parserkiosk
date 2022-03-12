@@ -1,5 +1,5 @@
 from importlib import resources as pkg_resources
-
+from typing import Any, Dict, Literal, Union, List, Tuple
 import jinja2
 from box import Box
 from yaml import load as load_yaml
@@ -14,7 +14,7 @@ except ImportError:
 import argparse
 
 
-def get_template(path, is_builtin):
+def get_template(path: str, is_builtin: bool) -> jinja2.Template:
     if is_builtin:
         return jinja2.Template(
             pkg_resources.read_text('parserkiosk.templates', f'{path}.jinja2')
@@ -23,7 +23,7 @@ def get_template(path, is_builtin):
         return jinja2.Template(template_file.read())
 
 
-def get_ext(template_name):
+def get_ext(template_name: str) -> str:
     match template_name:
         case 'node_js':
             return 'js'
@@ -33,7 +33,13 @@ def get_ext(template_name):
             raise Exception(f'Unsupported builtin template "{template_name}".')
 
 
-def generate_test(tests, test_type, compare_funcs, template, ext):
+def generate_test(
+    tests: Dict[str, Any],
+    test_type: Union[Literal['SERIALIZE'], Literal['DE_SERIALIZE']],
+    compare_funcs: List[str],
+    template: jinja2.Template,
+    ext: str,
+) -> None:
     with open(f'tests/test_{test_type.lower()}.{ext}', 'w') as test_file:
         test_file.write(
             template.render(
@@ -44,13 +50,13 @@ def generate_test(tests, test_type, compare_funcs, template, ext):
         )
 
 
-def read_yaml(filename):
+def read_yaml(filename) -> Tuple[Dict[str, Any], List[str]]:
     with open(filename, 'r') as file:
         content = Box(load_yaml(file.read(), Loader=YamlLoader))
     return content.tests, content.compare_functions
 
 
-def validate_cli_args(args):
+def validate_cli_args(args) -> None:
     if args.builtin and args.path:
         raise Exception('Cannot generate two test-suites at a time.')
     elif not args.builtin and not args.path:
