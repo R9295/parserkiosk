@@ -1,6 +1,5 @@
 __pycache__/
 doc.md
-tests/
 parserkiosk.egg-info*
 build/*
 dist/*

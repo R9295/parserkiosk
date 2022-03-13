@@ -1,11 +1,12 @@
-from commons import (
-    {% for func in compare_funcs -%}
-    {{ func }},
+import json
+#from commons import (
+{% for func in compare_funcs -%}
+#    {{ func }},
     {% endfor -%}
-)
+#)
 
 # assign me
-{{ test_func }} = None
+{{ test_func }} = json.loads
 
 {% for t_name, t in tests.items() %}
 def {{t_name}}():
