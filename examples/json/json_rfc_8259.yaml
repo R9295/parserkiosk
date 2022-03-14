@@ -1,5 +1,5 @@
 ---
-# based on https://github.com/nst/JSONTestSuite
+# test cases from https://github.com/nst/JSONTestSuite
   compare_functions:
     - compare_dict
   tests:
