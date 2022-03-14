@@ -15,7 +15,7 @@ def {{t_name}}():
     '''
     {%- if t.input.type == "file" %}
     data = None
-    with open('fixtures/{{t.input.arg}}', 'r') as file:
+    with open('fixtures/{{t.input.arg}}', 'rb') as file:
         data = file.read()
     {%- elif t.input.type == "raw" %}
     data = {{ t.input.arg }}
