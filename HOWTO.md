@@ -9,10 +9,10 @@ Let's write a simple "serializer", it should:
 ``` python
 # serializer.py
 def serialize(my_str):
-  serialized = my_str.split(',')
-  if len(serialized) < 2:
-    raise Exception('Need atleast two entries')
-  return serialized
+    serialized = my_str.split(',')
+    if len(serialized) < 2:
+        raise Exception('Need atleast two entries')
+    return serialized
 ```
 2. Install Parserkiosk
 ``` bash
@@ -23,7 +23,7 @@ pip install parserkiosk
 # config.yaml
 ---
 assert_functions:
-  - assert_list
+  - assert_list_entries
 ```
 4. Write a simple test case in ```test_serialize.yaml```
 ``` yaml
