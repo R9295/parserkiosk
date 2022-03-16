@@ -67,12 +67,8 @@ def test_something():
     assert assert_list_entries(serialized_data, ["hello", "world"])
 ```
 6. Let's write the ``assert_list`` function
-``` bash
-# cd back out of tests
-cd ..
-```
 ``` python
-# commons.py
+# tests/commons.py
 def assert_list_entries(a , b):
   for index, item in enumerate(a):
     if not item == b[index]:
