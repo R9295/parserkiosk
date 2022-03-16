@@ -1,7 +1,8 @@
+import argparse
 import glob
 import os
 from importlib import resources as pkg_resources
-from typing import Any, Dict, Literal, Union
+from typing import Any, Dict
 
 import jinja2
 from box import Box
@@ -13,8 +14,6 @@ try:
     from yaml import CLoader as YamlLoader
 except ImportError:
     from yaml import Loader as YamlLoader
-
-import argparse
 
 
 def get_template(path: str, is_builtin: bool) -> jinja2.Template:
@@ -39,7 +38,6 @@ def get_ext(template_name: str) -> str:
 def generate_test(
     filename: str,
     tests: Dict[str, Any],
-    test_type: Union[Literal['SERIALIZE'], Literal['DE_SERIALIZE']],
     config: Dict[str, Any],
     template: jinja2.Template,
     ext: str,
@@ -48,14 +46,14 @@ def generate_test(
         with open(f'tests/{filename}.{ext}', 'w') as test_file:
             test_file.write(
                 template.render(
-                    tests=tests,
-                    test_func=f'{test_type}_FUNC',
+                    tests=tests.tests,
+                    test_func=f'{tests.test_type}_FUNC',
                     assert_funcs=config.assert_functions,
                 )
             )
     except FileNotFoundError:
         os.mkdir(os.path.join(os.path.curdir, 'tests'))
-        return generate_test(filename, tests, test_type, config, template, ext)
+        return generate_test(filename, tests, config, template, ext)
 
 
 def read_yaml(filename) -> Dict[str, Any]:
@@ -117,11 +115,10 @@ def main() -> None:
     )
     for test in tests:
         test_yaml = read_yaml(test)
-        test_name = test.split('/')[-1].replace('.yaml', '')
+        test_file_name = test.split('/')[-1].replace('.yaml', '')
         generate_test(
-            test_name,
-            test_yaml.tests,
-            test_yaml.type,
+            test_file_name,
+            test_yaml,
             config,
             template,
             ext,
