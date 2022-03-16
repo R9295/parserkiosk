@@ -1,7 +1,7 @@
 import glob
 import os
 from importlib import resources as pkg_resources
-from typing import Any, Dict, List, Literal, Union
+from typing import Any, Dict, Literal, Union
 
 import jinja2
 from box import Box
@@ -44,14 +44,18 @@ def generate_test(
     template: jinja2.Template,
     ext: str,
 ) -> None:
-    with open(f'tests/{filename}.{ext}', 'w') as test_file:
-        test_file.write(
-            template.render(
-                tests=tests,
-                test_func=f'{test_type}_FUNC',
-                assert_funcs=config.assert_funcs,
+    try:
+        with open(f'tests/{filename}.{ext}', 'w') as test_file:
+            test_file.write(
+                template.render(
+                    tests=tests,
+                    test_func=f'{test_type}_FUNC',
+                    assert_funcs=config.assert_functions,
+                )
             )
-        )
+    except FileNotFoundError:
+        os.mkdir(os.path.join(os.path.curdir, 'tests'))
+        return generate_test(filename, tests, test_type, config, template, ext)
 
 
 def read_yaml(filename) -> Dict[str, Any]:

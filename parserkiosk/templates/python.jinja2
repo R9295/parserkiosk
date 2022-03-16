@@ -1,6 +1,6 @@
 import json
 from commons import (
-{% for func in compare_funcs -%}
+    {% for func in assert_funcs -%}
     {{ func }},
     {%- endfor %}
 )
@@ -10,11 +10,11 @@ from commons import (
 
 {% for t_name, t in tests.items() %}
 def {{t_name}}():
-    {%- if t.info != ''%}
+    {%- if t.info != '' %}
     '''
     {{t.info}}
     '''
-    {% endif %}
+    {%- endif %}
     {%- if t.input.type == "file" %}
     data = None
     with open('fixtures/{{t.input.arg}}', 'rb') as file:
