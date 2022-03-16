@@ -53,9 +53,27 @@ tests:
 4. Run Parserkiosk
 ``` bash
 $ parserkiosk . --builtin python
-$ Done
+Done
 $ cd tests
 $ ls
+test_serialize.py
+$ cat test_serialize.py
+```
+``` python
+from commons import (
+    assert_dict,
+)
+
+# ASSIGN ME
+SERIALIZE_FUNC = None
+
+def test_something():
+    '''
+    Example Test
+    '''
+    data = "hello, world"
+    serialized_data = SERIALIZE_FUNC(data)
+    assert assert_dict(serialized_data, ["hello", "world "])
 ```
 
 ### License
