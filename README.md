@@ -59,7 +59,7 @@ tests:
         arg: '"hello, world"'
       assert:
         func: "assert_list"
-        arg: "[\"hello\", \"world \"]"
+        arg: "[\"hello\", \"world\"]"
 ```
 5. Run Parserkiosk
 ``` bash
