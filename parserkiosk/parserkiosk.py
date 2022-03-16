@@ -40,7 +40,7 @@ def generate_test(
     filename: str,
     tests: Dict[str, Any],
     test_type: Union[Literal['SERIALIZE'], Literal['DE_SERIALIZE']],
-    compare_funcs: List[str],
+    config: Dict[str, Any],
     template: jinja2.Template,
     ext: str,
 ) -> None:
@@ -49,7 +49,7 @@ def generate_test(
             template.render(
                 tests=tests,
                 test_func=f'{test_type}_FUNC',
-                compare_funcs=compare_funcs,
+                assert_funcs=config.assert_funcs,
             )
         )
 
@@ -108,7 +108,6 @@ def main() -> None:
         return
     config = read_yaml(os.path.join(args.dir, 'config.yaml'))
     tests = glob.glob(f'{args.dir}/test_*.yaml')
-    compare_funcs = config.compare_functions
     template = get_template(
         args.builtin or args.path, args.builtin is not None
     )
@@ -119,7 +118,7 @@ def main() -> None:
             test_name,
             test_yaml.tests,
             test_yaml.type,
-            compare_funcs,
+            config,
             template,
             ext,
         )

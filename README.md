@@ -32,7 +32,7 @@ pip install parserkiosk
 ```
 2. Write a simple ```config.yaml```
 ``` yaml
-compare_functions:
+assert_functions:
   - assert_dict
 ```
 3. Write a simple test case in ```test_serialize.py```
