@@ -47,7 +47,7 @@ tests:
         arg: '"hello, world"'
       assert:
         func: "assert_dict"
-        arg: '"[\"hello\", \"world \"]"'
+        arg: "[\"hello\", \"world \"]"
 ```
 4. Run Parserkiosk
 ``` bash
