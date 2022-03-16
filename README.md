@@ -1,7 +1,7 @@
 ## ParserKiosk: A multi-lingual test generation suite intended for parsers
 
 ### Motivation
-After reading this [article](https://seriot.ch/projects/parsing_json.html) and [this one](https://bishopfox.com/blog/json-interoperability-vulnerabilities), I am now under the assumption that implementations of data serialization and deserialization have a lot of quirks that differ from language to language, and implementation to implementation.
+After reading this [article](https://seriot.ch/projects/parsing_json.html) and [this one](https://bishopfox.com/blog/json-interoperability-vulnerabilities), I am now paranoid and under the assumption that implementations of data serialization and deserialization have a lot of quirks that differ from language to language, and implementation to implementation.
 
 This _could_ lead to serious security issues as applications, especially web applicatons _usually_ utilize multiple services, written in multiple languages that use the same format to communicate. 
 
