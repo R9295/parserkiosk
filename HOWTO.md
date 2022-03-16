@@ -50,6 +50,7 @@ test_serialize.py
 $ cat test_serialize.py
 ```
 ``` python
+# tests/test_serialize.py
 from commons import (
     assert_list_entries,
 )
@@ -66,6 +67,10 @@ def test_something():
     assert assert_list_entries(serialized_data, ["hello", "world"])
 ```
 6. Let's write the ``assert_list`` function
+``` bash
+# cd back out of tests
+cd ..
+```
 ``` python
 # commons.py
 def assert_list_entries(a , b):
