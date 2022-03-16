@@ -26,17 +26,25 @@ For more on this, see ```examples/json/```
 - [ ] ...
 
 ### How do I use it?
-1. Install Parserkiosk
+1. Let's write a simple serializer:
+``` bash
+vim serializer.py
+```
+``` python
+def serialize(my_str):
+  return my_str.split(',')
+```
+2. Install Parserkiosk
 ``` bash
 pip install parserkiosk
 ```
-2. Write a simple ```config.yaml```
+3. Write a simple ```config.yaml```
 ``` yaml
 ---
 assert_functions:
-  - assert_dict
+  - assert_list
 ```
-3. Write a simple test case in ```test_serialize.yaml```
+4. Write a simple test case in ```test_serialize.yaml```
 ``` yaml
 ---
 type: "SERIALIZE"
@@ -47,10 +55,10 @@ tests:
         type: "raw"
         arg: '"hello, world"'
       assert:
-        func: "assert_dict"
+        func: "assert_list"
         arg: "[\"hello\", \"world \"]"
 ```
-4. Run Parserkiosk
+5. Run Parserkiosk
 ``` bash
 $ parserkiosk . --builtin python
 Done
@@ -61,7 +69,7 @@ $ cat test_serialize.py
 ```
 ``` python
 from commons import (
-    assert_dict,
+    assert_list,
 )
 
 # ASSIGN ME
@@ -73,9 +81,21 @@ def test_something():
     '''
     data = "hello, world"
     serialized_data = SERIALIZE_FUNC(data)
-    assert assert_dict(serialized_data, ["hello", "world "])
+    assert assert_list(serialized_data, ["hello", "world"])
 ```
-
+6. Let's write the ``assert_list`` function
+``` bash
+$ vim commons.py
+```
+``` python
+def assert_list(a , b):
+  for index, item in enumerate(a):
+    if not item == b[index]:
+      return False
+  return True
+```
+### To continue 
+```
 ### License
 All work is licensed under ```GPL-3.0```
 
