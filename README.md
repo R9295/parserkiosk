@@ -1,7 +1,11 @@
 ## ParserKiosk: A multi-lingual test generation suite intended for parsers
 
 ### Motivation
-After reading this [article](https://seriot.ch/projects/parsing_json.html) and [this one](https://bishopfox.com/blog/json-interoperability-vulnerabilities), I am now under the assumption that implementations of data serialization and deserialization have a lot of quirks that differ from language to language, and implementation to implementation. This _could_ lead to serious security issues as applications, especially web applicatons _usually_ utilize multiple services, written in multiple languages that use the same format to communicate. Reference implementations usually provide tests, but translating them from language to language is tiresome and tedious. I wanted to compose a library to generate **simple**, functional tests for multiple languages with minimal repitition. 
+After reading this [article](https://seriot.ch/projects/parsing_json.html) and [this one](https://bishopfox.com/blog/json-interoperability-vulnerabilities), I am now under the assumption that implementations of data serialization and deserialization have a lot of quirks that differ from language to language, and implementation to implementation.
+
+This _could_ lead to serious security issues as applications, especially web applicatons _usually_ utilize multiple services, written in multiple languages that use the same format to communicate. 
+
+Reference implementations usually provide tests, but translating them from language to language is tiresome and tedious. I wanted to compose a library to generate **simple**, functional tests for multiple languages with minimal repitition. 
 
 ### How does it work?
 Parserkiosk uses ``jinja2`` templates to generate test cases from ``yaml`` file(s). You can either expect something to fail(raise an "exception" or "error") or use a function that you define in a special file called ```commons``` to assert if the parsed data matches the expected internal representation. 
@@ -23,16 +27,16 @@ For more on this, see ```examples/json/```
 
 ### How do I use it?
 1. Install Parserkiosk
-```
+``` bash
 pip install parserkiosk
 ```
 2. Write a simple ```config.yaml```
-```
+``` yaml
 compare_functions:
   - assert_dict
 ```
 3. Write a simple test case in ```test_serialize.py```
-```
+``` yaml
 ---
 type: "SERIALIZE"
 tests:
@@ -50,7 +54,7 @@ tests:
 $ parserkiosk . --builtin python
 $ Done
 $ cd tests
-ls
+$ ls
 ```
 
 ### License
