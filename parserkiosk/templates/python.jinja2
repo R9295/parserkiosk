@@ -1,18 +1,20 @@
 import json
-#from commons import (
+from commons import (
 {% for func in compare_funcs -%}
-#    {{ func }},
-    {% endfor -%}
-#)
+    {{ func }},
+    {%- endfor %}
+)
 
-# assign me
-{{ test_func }} = json.loads
+# ASSIGN ME
+{{ test_func }} = None
 
 {% for t_name, t in tests.items() %}
 def {{t_name}}():
+    {%- if t.info != ''%}
     '''
     {{t.info}}
     '''
+    {% endif %}
     {%- if t.input.type == "file" %}
     data = None
     with open('fixtures/{{t.input.arg}}', 'rb') as file:

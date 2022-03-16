@@ -1,7 +1,7 @@
 import {
     {% for func in compare_funcs -%}
     {{ func }},
-    {% endfor -%}
+    {%- endfor %}
 } from './commons';
 import { readFileSync } from 'fs';
 

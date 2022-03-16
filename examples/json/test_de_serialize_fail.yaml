@@ -1,10 +1,7 @@
 ---
 # test cases from https://github.com/nst/JSONTestSuite
-  compare_functions:
-    - compare_dict
+  type: "SERIALIZE"
   tests:
-    test_serialization:
-      # SHOULD NOT PARSE
       test_array_no_comma:
           info: "Should not parse an array with multiple entries with no comma separation"
           input:
