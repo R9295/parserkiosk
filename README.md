@@ -29,7 +29,7 @@ For more on this, see ```examples/json/```
 - [ ] ...
 
 ### How do I use it?
-1. Let's write a simple serializer:
+1. Let's write a simple "serializer":
 ``` bash
 vim serializer.py
 ```
