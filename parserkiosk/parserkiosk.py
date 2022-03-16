@@ -47,7 +47,7 @@ def generate_test(
             test_file.write(
                 template.render(
                     tests=tests.tests,
-                    test_func=f'{tests.test_type}_FUNC',
+                    test_func=f'{tests.type}_FUNC',
                     assert_funcs=config.assert_functions,
                 )
             )
