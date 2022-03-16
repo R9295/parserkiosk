@@ -31,7 +31,7 @@ For more on this, see ```examples/json/```
 ### How do I use it?
 1. Let's write a simple "serializer":
 ``` bash
-vim serializer.py
+$ vim serializer.py
 ```
 ``` python
 def serialize(my_str):
