@@ -1,11 +1,18 @@
 ## Basic Example
-1. Let's write a simple "serializer":
-``` bash
-$ vim serializer.py
-```
+Let's write a simple "serializer", it should:
+1. Take a string containing words that are separated by commas
+2. Should return a list of those words. 
+3. Enforce atleast two entries in the list (two words, one comma)
+---
+1. Initialize serializer
+
 ``` python
+# serializer.py
 def serialize(my_str):
-  return my_str.split(',')
+  serialized = my_str.split(',')
+  if len(serialized) < 2:
+    raise Exception('Need atleast two entries')
+  return serialized
 ```
 2. Install Parserkiosk
 ``` bash
@@ -13,12 +20,14 @@ pip install parserkiosk
 ```
 3. Write a simple ```config.yaml```
 ``` yaml
+# config.yaml
 ---
 assert_functions:
   - assert_list
 ```
 4. Write a simple test case in ```test_serialize.yaml```
 ``` yaml
+# test_serialize.yaml
 ---
 type: "SERIALIZE"
 tests:
@@ -28,7 +37,7 @@ tests:
         type: "raw"
         arg: '"hello, world"'
       assert:
-        func: "assert_list"
+        func: "assert_list_entries"
         arg: "[\"hello\", \"world\"]"
 ```
 5. Run Parserkiosk
@@ -42,7 +51,7 @@ $ cat test_serialize.py
 ```
 ``` python
 from commons import (
-    assert_list,
+    assert_list_entries,
 )
 
 # ASSIGN ME
@@ -54,14 +63,12 @@ def test_something():
     '''
     data = "hello, world"
     serialized_data = SERIALIZE_FUNC(data)
-    assert assert_list(serialized_data, ["hello", "world"])
+    assert assert_list_entries(serialized_data, ["hello", "world"])
 ```
 6. Let's write the ``assert_list`` function
-``` bash
-$ vim commons.py
-```
 ``` python
-def assert_list(a , b):
+# commons.py
+def assert_list_entries(a , b):
   for index, item in enumerate(a):
     if not item == b[index]:
       return False
