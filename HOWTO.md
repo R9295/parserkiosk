@@ -38,7 +38,7 @@ tests:
         arg: '"hello, world"'
       assert:
         func: "assert_list_entries"
-        arg: "[\"hello\", \"world\"]"
+        arg: "[\"hello\", \" world\"]"
 ```
 5. Run Parserkiosk
 ``` bash
@@ -64,7 +64,7 @@ def test_something():
     '''
     data = "hello, world"
     serialized_data = SERIALIZE_FUNC(data)
-    assert assert_list_entries(serialized_data, ["hello", "world"])
+    assert assert_list_entries(serialized_data, ["hello", " world"])
 ```
 6. Let's write the ``assert_list`` function
 ``` python
@@ -96,7 +96,7 @@ def test_something():
     '''
     data = "hello, world"
     serialized_data = SERIALIZE_FUNC(data)
-    assert assert_list_entries(serialized_data, ["hello", "world"])
+    assert assert_list_entries(serialized_data, ["hello", " world"])
 ```
 9. We should be able to run the suite!
 ```
