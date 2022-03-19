@@ -13,6 +13,8 @@ test('{{t.info}}', () => {
     data = readFileSync("fixtures/{{t.input.arg}}", "utf-8")
     {%- elif t.input.type == "raw" %}
     data = {{ t.input.arg }}
+    {%- elif t.input.type == "str" %}
+    data = "{{ t.input.arg }}"
     {%- endif %}
     {% if t.assert.func != "fail" -%}
     serialized_data = {{test_func}}(data)
