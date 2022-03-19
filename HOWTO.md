@@ -81,15 +81,14 @@ $ cd ..
 $ mv serializer.py tests/
 ```
 8. Edit tests/test_serialize.py
-```
+``` python
 # tests/test_serialize.py
-from serialier import serialize
+from serialier import serialize # import
 from commons import (
     assert_list_entries,
 )
 
-# ASSIGN ME
-SERIALIZE_FUNC = serialize
+SERIALIZE_FUNC = serialize # set the serialize function
 
 def test_something():
     '''
