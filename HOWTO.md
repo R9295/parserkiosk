@@ -34,8 +34,8 @@ tests:
   test_something:
       info: "Example Test"
       input:
-        type: "raw"
-        arg: '"hello, world"'
+        type: "str"
+        arg: "hello, world"
       assert:
         func: "assert_list_entries"
         arg: "[\"hello\", \" world\"]"
