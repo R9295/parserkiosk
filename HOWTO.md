@@ -99,7 +99,14 @@ def test_something():
     assert assert_list_entries(serialized_data, ["hello", " world"])
 ```
 9. We should be able to run the suite!
-```
+``` bash
 $ cd tests
 $ pytest .
+platform linux -- Python 3.10.2, pytest-7.0.1, pluggy-1.0.0
+rootdir: /home/x/y/z/tests
+collected 1 item
+test_serialize.py .                                                                                                                                                                                         [100%]
+
+================================================================================================ 1 passed in 0.01s ================================================================================================
+
 ```
