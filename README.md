@@ -11,7 +11,7 @@ Reference implementations usually provide tests, but translating them from langu
 Parserkiosk uses ``jinja2`` templates to generate test cases from ``yaml`` file(s). You can either expect something to fail(raise an "exception" or "error") or use a function that you define in a special file called ```commons``` to assert if the parsed data matches the expected internal representation. 
 
 Let's say you've written a reference implementation of your data de/serialization format in ``Go`` and I wanted to implement it in ``Python``.  
-All I would need to do is:
+All I would need to do to implement your test-suite is:
 1. Write a ```commons.py``` file implementing the same assertion functions that you've written in your ``commons.go`` file
 2. Run ```$ parserkiosk folder_with_yaml_test_files/ --builtin python``` and _voila_ I have your entire test suite implemented!
 
