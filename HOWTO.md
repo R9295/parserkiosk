@@ -8,8 +8,8 @@ Let's write a simple "serializer", it should:
 
 ``` python
 # serializer.py
-def serialize(my_str):
-    serialized = my_str.split(',')
+def serialize(string):
+    serialized = string.split(',')
     if len(serialized) < 2:
         raise Exception('Need atleast two entries')
     return serialized
