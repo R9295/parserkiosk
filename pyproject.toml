@@ -21,6 +21,7 @@ readme = "README.md"
 
 classifiers = [
     "Topic :: Software Development :: Testing",
+    "Operating System :: OS Independent",
 ]
 
 packages = [
