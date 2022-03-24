@@ -257,7 +257,7 @@ tests:
         arg: "[\"hello\", \" world\"]"
       assert:
         func: "assert_string"
-        arg: "hello, world"
+        arg: "\"hello, world\""
 ```
 16. Add new assert function in our config
 ``` yaml
@@ -276,7 +276,74 @@ def assert_list_entries(a, b):
       return False
   return True
 
-
+# this function
 def assert_string(a, b):
     return a == b
+```
+18. Generate tests
+``` bash
+# in dir parser
+$ parserkiosk . --builtin python
+$ ls tests/
+commons.py  __init__.py  __pycache__  test_de_serialize.py  test_serialize.py
+```
+19. Assign functions (1/2)
+``` python 
+# parser/tests/test_serialize.py
+from parser.serializer import serialize # here
+from .commons import (
+    assert_list_entries,assert_string,
+)
+
+# ASSIGN ME
+SERIALIZE_FUNC = serialize # here
+
+def test_something():
+    '''
+    Example Test
+    '''
+    data = "hello, world"
+    serialized_data = SERIALIZE_FUNC(data)
+    assert assert_list_entries(serialized_data, ["hello", " world"])
+
+def test_error_less_than_two_comma_entries():
+    '''
+    Should raise an error when given a string without any comma separated values
+    '''
+    data = "helloworld"
+    try:
+        serialized_data = SERIALIZE_FUNC(data)
+        assert False
+    except Exception as e:
+        pass
+```
+20. Assign functions (2/2)
+``` python
+from parser.serializer import de_serialize
+from .commons import (
+    assert_list_entries,assert_string,
+)
+
+# ASSIGN ME
+DE_SERIALIZE_FUNC = de_serialize
+
+def test_de_serialize():
+    '''
+    Should return a string of words separated by commas
+    '''
+    data = ["hello", " world"]
+    serialized_data = DE_SERIALIZE_FUNC(data)
+    assert assert_string(serialized_data, "hello, world")
+```
+21. Run tests!
+``` bash
+============================================= test session starts ==============================================
+platform linux -- Python 3.10.2, pytest-7.0.1, pluggy-1.0.0
+rootdir: /x/y/z/parser
+collected 3 items
+
+tests/test_de_serialize.py .
+tests/test_serialize.py ..
+
+============================================== 3 passed in 0.01s ===============================================
 ```
