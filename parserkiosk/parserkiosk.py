@@ -79,6 +79,8 @@ def read_yaml(filename) -> Dict[str, Any]:
 
 
 def validate_cli_args(args) -> None:
+    if not os.path.exists(os.path.join(args.dir, 'config.yaml')):
+        raise Exception('No config found in directory provided')
     if not os.path.isdir(args.dir):
         raise Exception('The dir provided is not a directory!')
     if args.builtin and args.path:
