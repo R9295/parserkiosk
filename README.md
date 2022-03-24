@@ -32,7 +32,7 @@ For more on this, see ```examples/json/```
 See [HOWTO](HOWTO.md)
 
 ### License
-All work is licensed under ```GPL-3.0```
+All work is licensed under ```GPL-3.0``` excluding the example JSON test-suite which is licensed under ```MIT```
 
 ### Contributing
 Issues, feedback and pull requests are welcome. I have tried _my best_ to keep the code simple. Please keep in mind that I wish to limit features that we accomodate to keep it simple. Tests should be simple and readable.
