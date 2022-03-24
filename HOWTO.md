@@ -4,30 +4,35 @@ Let's write a simple "serializer", it should:
 2. Should return a list of those words. 
 3. Enforce atleast two entries in the list (two words, one comma)
 ---
-1. Initialize serializer
-
+1. Initialize parser module
 ``` python
-# serializer.py
+$ mkdir parser
+$ cd parser
+$ touch __init__.py
+```
+2. Initialize serializer
+``` python
+# parser/serializer.py
 def serialize(string):
     serialized = string.split(',')
     if len(serialized) < 2:
         raise Exception('Need atleast two entries')
     return serialized
 ```
-2. Install Parserkiosk
+3. Install dependencies (ParserKiosk and Pytest)
 ``` bash
-pip install parserkiosk
+pip install parserkiosk pytest
 ```
 3. Write a simple ```config.yaml```
 ``` yaml
-# config.yaml
+# parser/config.yaml
 ---
 assert_functions:
   - assert_list_entries
 ```
 4. Write a simple test case in ```test_serialize.yaml```
 ``` yaml
-# test_serialize.yaml
+# parser/test_serialize.yaml
 ---
 type: "SERIALIZE"
 tests:
@@ -50,8 +55,8 @@ test_serialize.py
 $ cat test_serialize.py
 ```
 ``` python
-# tests/test_serialize.py
-from commons import (
+# parser/tests/test_serialize.py
+from .commons import (
     assert_list_entries,
 )
 
@@ -66,25 +71,25 @@ def test_something():
     serialized_data = SERIALIZE_FUNC(data)
     assert assert_list_entries(serialized_data, ["hello", " world"])
 ```
-6. Let's write the ``assert_list`` function
+6. Let's write the ``assert_list_entries`` function
 ``` python
-# tests/commons.py
-def assert_list_entries(a , b):
+# parser/tests/commons.py
+def assert_list_entries(a, b):
   for index, item in enumerate(a):
     if item != b[index]:
       return False
   return True
 ```
-7. Now we should be ready to run! Usually, SERIALIZE_FUNC would be from a module but since we just have a file, we need to copy it into the test dir
+7. Add an ``__init__.py`` in ``tests/``
 ```
 $ cd ..
-$ mv serializer.py tests/
+$ touch tests/__init__.py
 ```
-8. Edit tests/test_serialize.py
+8. Edit tests/test_serialize.py to use our function
 ``` python
-# tests/test_serialize.py
-from serialier import serialize # import
-from commons import (
+# parser/tests/test_serialize.py
+from parser.serializer import serialize # import
+from .commons import (
     assert_list_entries,
 )
 
@@ -100,7 +105,7 @@ def test_something():
 ```
 9. We should be able to run the suite!
 ``` bash
-$ cd tests
+# in directory parser
 $ pytest .
 platform linux -- Python 3.10.2, pytest-7.0.1, pluggy-1.0.0
 rootdir: /home/x/y/z/tests
