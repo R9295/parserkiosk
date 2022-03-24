@@ -222,7 +222,7 @@ tests/test_serialize.py ..
 
 ============================================== 2 passed in 0.01s ===============================================
 ```
-We successfully generated a test where we can assert that an error was raised
+We successfully generated a test where we can assert that an error was raised.  
 Importing and assigning these functions everytime we generate tests is annoying, a feature to remove this manual labour this is WIP.
 
 ### Let's add deserialization functionality to our serializer
@@ -244,7 +244,7 @@ def de_serialize(array):
     return reduce(lambda a, b: f'{a},{b}', array)
 ```
 15. Define tests for this function
-```
+``` yaml
 # WARNING: This is a new ymal file! test_de_serialize not test_serialize
 # parser/test_de_serialize.yaml
 ---
