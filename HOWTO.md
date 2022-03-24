@@ -1,5 +1,5 @@
 ## Basic Example
-Let's write a simple "serializer", it should:
+Let's write a simple "parser", it should:
 1. Take a string containing words that are separated by commas
 2. Should return a list of those words. 
 3. Enforce atleast two entries in the list (two words, one comma)
@@ -58,6 +58,7 @@ $ cat test_serialize.py
 # parser/tests/test_serialize.py
 from .commons import (
     assert_list_entries,
+
 )
 
 # ASSIGN ME
@@ -91,6 +92,7 @@ $ touch tests/__init__.py
 from parser.serializer import serialize # import
 from .commons import (
     assert_list_entries,
+
 )
 
 SERIALIZE_FUNC = serialize # set the serialize function
@@ -154,6 +156,7 @@ $ parserkiosk . --builtin python
 $ cat tests/test_serialize.py
 from .commons import (
     assert_list_entries,
+
 )
 
 # ASSIGN ME
@@ -184,6 +187,7 @@ def test_error_less_than_two_comma_entries():
 from parser.serializer import serialize # here
 from .commons import (
     assert_list_entries,
+
 )
 
 # ASSIGN ME
@@ -292,7 +296,9 @@ commons.py  __init__.py  __pycache__  test_de_serialize.py  test_serialize.py
 # parser/tests/test_serialize.py
 from parser.serializer import serialize # here
 from .commons import (
-    assert_list_entries,assert_string,
+    assert_list_entries,
+    assert_string,
+
 )
 
 # ASSIGN ME
@@ -321,7 +327,9 @@ def test_error_less_than_two_comma_entries():
 ``` python
 from parser.serializer import de_serialize
 from .commons import (
-    assert_list_entries,assert_string,
+    assert_list_entries,
+    assert_string,
+
 )
 
 # ASSIGN ME
