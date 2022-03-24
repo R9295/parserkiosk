@@ -1,18 +1,39 @@
 [tool.poetry]
 name = "parserkiosk"
-version = "0.1.0"
-description = "A test-suite generator for parsers."
+version = "0.0.2"
+description = "A multi-lingual test-suite generator for parsers."
+
 authors = ["aarnav <aarnavbos@gmail.com>"]
+
 license = "GPL-3.0"
+
 homepage = "https://github.com/R9295/parser-kiosk"
 repository = "https://github.com/R9295/parser-kiosk"
 documentation = "https://github.com/R9295/parser-kiosk"
+
 keywords = [
     "Parsers",
     "Parser",
     "Code Generation",
     "Testing",
 ]
+
+readme = "README.md"
+
+classifiers = [
+    "Topic :: Software Development :: Testing",
+]
+
+packages = [
+    { include = "parserkiosk"}
+]
+ include = [
+#    { path = "tests", format = "sdist" }
+]
+
+[tool.poetry.scripts]
+parserkiosk = "parserkiosk:main"
+
 [tool.poetry.dependencies]
 python = "^3.10"
 PyYAML = "^6.0"
