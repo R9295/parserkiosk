@@ -1,8 +1,7 @@
 [tool.poetry]
 name = "parserkiosk"
-version = "0.0.2"
-description = "A multi-lingual test-suite generator for parsers."
-
+version = "0.1.0"
+description = "A Proof of Concept multi-lingual test generation suite intended for parsers."
 authors = ["aarnav <aarnavbos@gmail.com>"]
 
 license = "GPL-3.0"
