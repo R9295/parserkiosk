@@ -108,7 +108,7 @@ def test_something():
 # in directory parser
 $ pytest .
 platform linux -- Python 3.10.2, pytest-7.0.1, pluggy-1.0.0
-rootdir: /home/x/y/z/tests
+rootdir: /x/y/z/parser
 collected 1 item
 tests/test_serialize.py .                                                                                                                                                                                    [100%]
 
@@ -125,8 +125,8 @@ tests/test_serialize.py .                                                       
 
 Let's go further to see more ParserKiosk functionality.
 
-10. Let's write a test that is expected to fail, as we will supply less than two entries to our ``serialize`` function
-```
+10. Let's write a test that is expected to fail, as we will supply less than two entries to our ``serialize`` function. We can use the builtin assert function ```fail```
+``` yaml
 # parser/test_serialize.yaml
 ---
 type: "SERIALIZE"
@@ -148,7 +148,7 @@ tests:
       assert:
         func: "fail"
 ```
-11. Let's generate tests
+11. Generate tests
 ``` bash
 $ parserkiosk . --builtin python
 $ cat tests/test_serialize.py
@@ -178,7 +178,55 @@ def test_error_less_than_two_comma_entries():
     except Exception as e:
         pass
 ```
-13. Let's add a ``de_serialize`` function to convert data back into a string.
+12. Edit ```test_serialize.py``` to assign it functions
+``` python
+# parser/tests/test_serialize.py
+from parser.serializer import serialize # here
+from .commons import (
+    assert_list_entries,
+)
+
+# ASSIGN ME
+SERIALIZE_FUNC = serialize # here
+
+def test_something():
+    '''
+    Example Test
+    '''
+    data = "hello, world"
+    serialized_data = SERIALIZE_FUNC(data)
+    assert assert_list_entries(serialized_data, ["hello", " world"])
+
+def test_error_less_than_two_comma_entries():
+    '''
+    Should raise an error when given a string without any comma separated values
+    '''
+    data = "helloworld"
+    try:
+        serialized_data = SERIALIZE_FUNC(data)
+        assert False
+    except Exception as e:
+        pass
+```
+
+13. Run tests!
+``` bash
+# in dir parser/
+$ pytest -s .
+============================================= test session starts ==============================================
+platform linux -- Python 3.10.2, pytest-7.0.1, pluggy-1.0.0
+rootdir: /x/y/z/parser
+collected 2 items
+
+tests/test_serialize.py ..
+
+============================================== 2 passed in 0.01s ===============================================
+```
+We successfully generated a test where we can assert that an error was raised
+Importing and assigning these functions everytime we generate tests is annoying, a feature to remove this manual labour this is WIP.
+
+### Let's add deserialization functionality to our serializer
+14. Add a ``de_serialize`` function to convert data back into a string.
 ``` python
 # parser/serializer.py
 from functools import reduce  # add this
@@ -194,4 +242,41 @@ def serialize(string):
 # add this function
 def de_serialize(array):
     return reduce(lambda a, b: f'{a},{b}', array)
+```
+15. Define tests for this function
+```
+# WARNING: This is a new ymal file! test_de_serialize not test_serialize
+# parser/test_de_serialize.yaml
+---
+type: "DE_SERIALIZE"
+tests:
+  test_de_serialize:
+      info: "Should return a string of words separated by commas"
+      input:
+        type: "raw"
+        arg: "[\"hello\", \" world\"]"
+      assert:
+        func: "assert_string"
+        arg: "hello, world"
+```
+16. Add new assert function in our config
+``` yaml
+# parser/config.yaml
+---
+assert_functions:
+  - assert_list_entries
+  - assert_string
+```
+17. Define the function in the commons file
+``` python
+# parser/tests/commons.py
+def assert_list_entries(a, b):
+  for index, item in enumerate(a):
+    if item != b[index]:
+      return False
+  return True
+
+
+def assert_string(a, b):
+    return a == b
 ```
