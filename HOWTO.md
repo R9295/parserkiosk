@@ -71,7 +71,7 @@ def test_something():
 # tests/commons.py
 def assert_list_entries(a , b):
   for index, item in enumerate(a):
-    if not item == b[index]:
+    if item != b[index]:
       return False
   return True
 ```
