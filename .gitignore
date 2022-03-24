@@ -3,4 +3,4 @@ doc.md
 parserkiosk.egg-info*
 build/*
 dist/*
-
+.publish
