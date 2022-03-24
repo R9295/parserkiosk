@@ -85,7 +85,7 @@ def assert_list_entries(a, b):
 $ cd ..
 $ touch tests/__init__.py
 ```
-8. Edit tests/test_serialize.py to use our function
+8. Edit ``tests/test_serialize.py`` to use our function
 ``` python
 # parser/tests/test_serialize.py
 from parser.serializer import serialize # import
