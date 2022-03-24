@@ -1,7 +1,7 @@
 import {
     {% for func in assert_funcs -%}
     {{ func }},
-    {%- endfor %}
+    {% endfor %}
 } from './commons';
 import { readFileSync } from 'fs';
 
