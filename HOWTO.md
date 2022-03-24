@@ -115,3 +115,83 @@ tests/test_serialize.py .                                                       
 ================================================================================================ 1 passed in 0.01s ================================================================================================
 
 ```
+
+### Recap:
+1. We wrote a simple data serialization format
+2. We defined a function in ``config.yaml``  that we use to assert entries in our lists.
+3. We defined a test for the serializer in a ``test_serialize.yaml`` 
+4. We generated tests using parserkiosk
+5. Ran the test-suite, which worked as expected
+
+Let's go further to see more ParserKiosk functionality.
+
+10. Let's write a test that is expected to fail, as we will supply less than two entries to our ``serialize`` function
+```
+# parser/test_serialize.yaml
+---
+type: "SERIALIZE"
+tests:
+  test_something:
+      info: "Example Test"
+      input:
+        type: "str"
+        arg: "hello, world"
+      assert:
+        func: "assert_list_entries"
+        arg: "[\"hello\", \" world\"]"
+  # Add this test
+  test_error_less_than_two_comma_entries:
+      info: "Should raise an error when given a string without any comma separated values"
+      input:
+        type: "str"
+        arg: "helloworld"
+      assert:
+        func: "fail"
+```
+11. Let's generate tests
+``` bash
+$ parserkiosk . --builtin python
+$ cat tests/test_serialize.py
+from .commons import (
+    assert_list_entries,
+)
+
+# ASSIGN ME
+SERIALIZE_FUNC = None
+
+def test_something():
+    '''
+    Example Test
+    '''
+    data = "hello, world"
+    serialized_data = SERIALIZE_FUNC(data)
+    assert assert_list_entries(serialized_data, ["hello", " world"])
+
+def test_error_less_than_two_comma_entries():
+    '''
+    Should raise an error when given a string without any comma separated values
+    '''
+    data = "helloworld"
+    try:
+        serialized_data = SERIALIZE_FUNC(data)
+        assert False
+    except Exception as e:
+        pass
+```
+13. Let's add a ``de_serialize`` function to convert data back into a string.
+``` python
+# parser/serializer.py
+from functools import reduce  # add this
+
+
+def serialize(string):
+    serialized = string.split(',')
+    if len(serialized) < 2:
+        raise Exception('Need atleast two entries')
+    return serialized
+
+
+# add this function
+def de_serialize(array):
+    return reduce(lambda a, b: f'{a},{b}', array)
+```
