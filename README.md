@@ -31,8 +31,6 @@ For more on this, see ```examples/json/```
 ### How do I use it?
 See [HOWTO](HOWTO.md)
 
-### To continue 
-
 ### License
 All work is licensed under ```GPL-3.0```
 
