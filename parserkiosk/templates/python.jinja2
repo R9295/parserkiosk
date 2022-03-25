@@ -1,11 +1,9 @@
+{{ import_string }}
 from .commons import (
     {% for func in assert_funcs -%}
     {{ func }},
     {% endfor %}
 )
-
-# ASSIGN ME
-{{ test_func }} = None
 
 {% for t_name, t in tests.items() -%}
 def {{t_name}}():
@@ -24,11 +22,11 @@ def {{t_name}}():
     data = "{{ t.input.arg }}"
     {%- endif %}
     {% if t.assert.func != "fail" -%}
-            serialized_data = {{test_func}}(data)
+            serialized_data = {{func}}(data)
     assert {{ t.assert.func }}(serialized_data, {{ t.assert.arg }})
     {% else -%}
     try:
-        serialized_data = {{ test_func }}(data)
+        serialized_data = {{ func }}(data)
         assert False
     except Exception as e:
         {%- if t.assert.get('arg') != None %}

@@ -64,7 +64,12 @@ def generate_test(
             test_file.write(
                 template.render(
                     tests=tests.tests,
-                    test_func=f'{tests.type}_FUNC',
+                    func=(
+                        config.serialize_function
+                        if tests.type == 'SERIALIZE'
+                        else config.de_serialize_function
+                    ),
+                    import_string=config.import_string,
                     assert_funcs=config.assert_functions,
                 )
             )

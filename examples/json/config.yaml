@@ -1,3 +1,6 @@
 ---
+serialize_function: "json.loads"
+de_serialize_function: "json.dumps"
+import_string: "import json"
 assert_functions:
     - compare_dict

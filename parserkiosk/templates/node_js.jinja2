@@ -1,11 +1,10 @@
+{{ import_string }}
 import {
     {% for func in assert_funcs -%}
     {{ func }},
     {% endfor %}
 } from './commons';
 import { readFileSync } from 'fs';
-
-const {{ test_func }} = null;
 
 {% for t_name, t in tests.items() %}
 test('{{t.info}}', () => {
@@ -17,11 +16,11 @@ test('{{t.info}}', () => {
     data = "{{ t.input.arg }}"
     {%- endif %}
     {% if t.assert.func != "fail" -%}
-    serialized_data = {{test_func}}(data)
+    serialized_data = {{func}}(data)
     expect({{ t.assert.func }}(serialized_data, {{ t.assert.arg }})).toBe(true)
     {%- else -%}
     try {
-        serialized_data = {{ test_func }}(data)
+        serialized_data = {{ func }}(data)
         fail("Expected an error, but didn't get")
     } catch(e){
         {%- if t.assert.get('arg') != None %}
