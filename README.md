@@ -64,6 +64,7 @@ For more on this, see ```examples/json/```
 - [x] Python / pytest / ``python``
 - [x] NodeJS / jest (sync) / ``node_js``
 - [ ] NodeJS / jest (async)
+- [ ] Lua 
 - [ ] Go
 - [ ] Java
 - [ ] PHP
