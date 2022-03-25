@@ -16,6 +16,9 @@ $ pip install parserkiosk
 ``` yaml
 # config.yaml
 ---
+import_string: "from my_parser import serialize, deserialize"
+serialize_function: "serialize"
+de_serialize_function: "de_serialize"
 assert_functions:
   - my_assert_function
 ```
