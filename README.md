@@ -55,7 +55,8 @@ Parserkiosk uses ``jinja2`` templates to generate test cases from ``yaml`` file(
 Let's say you've written a reference implementation of your data de/serialization format in ``Go`` and I wanted to implement it in ``Python``.  
 All I would need to do to implement your test-suite is:
 1. Write a ```commons.py``` file implementing the same assertion functions that you've written in your ``commons.go`` file
-2. Run ```$ parserkiosk folder_with_yaml_test_files/ --builtin python``` and _voila_ I have your entire test suite implemented!
+2. Adapt the parserkiosk config to use my implementation
+3. Run ```$ parserkiosk folder_with_yaml_test_files/ --builtin python``` and _voila_ I have your entire test suite implemented!
 
 For more on this, see ```examples/json/```
 
