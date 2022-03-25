@@ -13,7 +13,6 @@ def {{t_name}}():
     '''
     {%- endif %}
     {%- if t.input.type == "file" %}
-    data = None
     with open('fixtures/{{t.input.arg}}', 'rb') as file:
         data = file.read()
     {%- elif t.input.type == "raw" %}
