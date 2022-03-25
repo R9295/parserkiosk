@@ -18,7 +18,7 @@ $ pip install parserkiosk
 ---
 import_string: "from my_parser import serialize, deserialize"
 serialize_function: "serialize"
-de_serialize_function: "de_serialize"
+de_serialize_function: "deserialize"
 assert_functions:
   - my_assert_function
 ```
