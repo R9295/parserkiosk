@@ -1,5 +1,5 @@
 ''''
-Copyright (C) 2021  Aarnav Bos
+Copyright (C) 2022 Aarnav Bos
 
 This program is free software: you can redistribute it and/or modify
 
