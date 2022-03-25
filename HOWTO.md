@@ -325,6 +325,7 @@ def test_error_less_than_two_comma_entries():
 ```
 20. Assign functions (2/2)
 ``` python
+# parser/tests/test_de_serialize.py
 from parser.serializer import de_serialize
 from .commons import (
     assert_list_entries,
