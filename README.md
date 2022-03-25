@@ -7,6 +7,45 @@ This _could_ lead to serious security issues as applications, especially web app
 
 Reference implementations usually provide tests, but translating them from language to language is tiresome and tedious. I wanted to compose a library to generate **simple**, functional tests for multiple languages with minimal repitition. 
 
+### Usage
+1. Install 
+``` bash
+$ pip install parserkiosk
+```
+2. Define a ``config.yaml``
+``` yaml
+# config.yaml
+---
+assert_functions:
+  - my_assert_function
+```
+3. Define a yaml file prefixed with ``test_`` in the same directory as ``config.yaml``
+``` yaml
+# test_serialize.yaml
+type: "SERIALIZE"
+tests:
+  test_something:
+      info: "Example Test"
+      input:
+        type: "str"
+        arg: "hello, world"
+      assert:
+        func: "assert_list_entries"
+        arg: "[\"hello\", \" world\"]"
+```
+4. Run parserkiosk in the same directory as ```config.yaml``` and ``test_serialize.yaml``
+``` bash
+$ parserkiosk . --builtin python # can be any builtin template
+```
+5. See output directory ```tests/```
+``` bash
+$ ls tests/
+test_serialize.py
+```
+
+
+See [HOWTO](HOWTO.md) for a complete guide.
+
 ### How does it work?
 Parserkiosk uses ``jinja2`` templates to generate test cases from ``yaml`` file(s). You can either expect something to fail(raise an "exception" or "error") or use a function that you define in a special file called ```commons``` to assert if the parsed data matches the expected internal representation. 
 
@@ -27,9 +66,6 @@ For more on this, see ```examples/json/```
 - [ ] Perl
 - [ ] Ruby
 - [ ] ...
-
-### How do I use it?
-See [HOWTO](HOWTO.md)
 
 ### License
 All work is licensed under ```GPL-3.0``` excluding the example JSON test-suite which is licensed under ```MIT```
