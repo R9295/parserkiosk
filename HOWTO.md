@@ -52,10 +52,9 @@ tests:
 ``` bash
 $ parserkiosk . --builtin python
 Done
-$ cd tests
-$ ls
+$ ls tests/
 test_serialize.py
-$ cat test_serialize.py
+$ cat tests/test_serialize.py
 ```
 ``` python
 # parser/tests/test_serialize.py
@@ -84,7 +83,6 @@ def assert_list_entries(a, b):
 ```
 7. Add an ``__init__.py`` in ``tests/``
 ```
-$ cd ..
 $ touch tests/__init__.py
 ```
 8. We should be able to run the suite!
