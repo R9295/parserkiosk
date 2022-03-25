@@ -57,6 +57,7 @@ $ cat tests/test_serialize.py
 ```
 ``` python
 # parser/tests/test_serialize.py
+import pytest
 from parser import serializer
 from .commons import (
     assert_list_entries,
@@ -133,6 +134,7 @@ tests:
 ``` bash
 $ parserkiosk . --builtin python
 $ cat tests/test_serialize.py
+import pytest
 from parser import serializer
 from .commons import (
     assert_list_entries,
@@ -154,7 +156,7 @@ def test_error_less_than_two_comma_entries():
     data = "helloworld"
     try:
         serialized_data = serializer.serialize(data)
-        assert False
+        pytest.fail()
     except Exception as e:
         pass
 ```
