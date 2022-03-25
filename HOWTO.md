@@ -27,6 +27,9 @@ pip install parserkiosk pytest
 ``` yaml
 # parser/config.yaml
 ---
+import_string: "from parser import serializer"
+serialize_function: "serializer.serialize"
+de_serialize_function: "serializer.de_serialize"
 assert_functions:
   - assert_list_entries
 ```
@@ -56,20 +59,18 @@ $ cat test_serialize.py
 ```
 ``` python
 # parser/tests/test_serialize.py
+from parser import serializer
 from .commons import (
     assert_list_entries,
 
 )
-
-# ASSIGN ME
-SERIALIZE_FUNC = None
 
 def test_something():
     '''
     Example Test
     '''
     data = "hello, world"
-    serialized_data = SERIALIZE_FUNC(data)
+    serialized_data = serializer.serialize(data)
     assert assert_list_entries(serialized_data, ["hello", " world"])
 ```
 6. Let's write the ``assert_list_entries`` function
@@ -86,26 +87,7 @@ def assert_list_entries(a, b):
 $ cd ..
 $ touch tests/__init__.py
 ```
-8. Edit ``tests/test_serialize.py`` to use our function
-``` python
-# parser/tests/test_serialize.py
-from parser.serializer import serialize # import
-from .commons import (
-    assert_list_entries,
-
-)
-
-SERIALIZE_FUNC = serialize # set the serialize function
-
-def test_something():
-    '''
-    Example Test
-    '''
-    data = "hello, world"
-    serialized_data = SERIALIZE_FUNC(data)
-    assert assert_list_entries(serialized_data, ["hello", " world"])
-```
-9. We should be able to run the suite!
+8. We should be able to run the suite!
 ``` bash
 # in directory parser
 $ pytest .
@@ -127,7 +109,7 @@ tests/test_serialize.py .                                                       
 
 Let's go further to see more ParserKiosk functionality.
 
-10. Let's write a test that is expected to fail, as we will supply less than two entries to our ``serialize`` function. We can use the builtin assert function ```fail```
+9. Let's write a test that is expected to fail, as we will supply less than two entries to our ``serialize`` function. We can use the builtin assert function ```fail```
 ``` yaml
 # parser/test_serialize.yaml
 ---
@@ -150,24 +132,22 @@ tests:
       assert:
         func: "fail"
 ```
-11. Generate tests
+10. Generate tests
 ``` bash
 $ parserkiosk . --builtin python
 $ cat tests/test_serialize.py
+from parser import serializer
 from .commons import (
     assert_list_entries,
 
 )
-
-# ASSIGN ME
-SERIALIZE_FUNC = None
 
 def test_something():
     '''
     Example Test
     '''
     data = "hello, world"
-    serialized_data = SERIALIZE_FUNC(data)
+    serialized_data = serializer.serialize(data)
     assert assert_list_entries(serialized_data, ["hello", " world"])
 
 def test_error_less_than_two_comma_entries():
@@ -176,44 +156,12 @@ def test_error_less_than_two_comma_entries():
     '''
     data = "helloworld"
     try:
-        serialized_data = SERIALIZE_FUNC(data)
+        serialized_data = serializer.serialize(data)
         assert False
     except Exception as e:
         pass
 ```
-12. Edit ```test_serialize.py``` to assign it functions
-``` python
-# parser/tests/test_serialize.py
-from parser.serializer import serialize # here
-from .commons import (
-    assert_list_entries,
-
-)
-
-# ASSIGN ME
-SERIALIZE_FUNC = serialize # here
-
-def test_something():
-    '''
-    Example Test
-    '''
-    data = "hello, world"
-    serialized_data = SERIALIZE_FUNC(data)
-    assert assert_list_entries(serialized_data, ["hello", " world"])
-
-def test_error_less_than_two_comma_entries():
-    '''
-    Should raise an error when given a string without any comma separated values
-    '''
-    data = "helloworld"
-    try:
-        serialized_data = SERIALIZE_FUNC(data)
-        assert False
-    except Exception as e:
-        pass
-```
-
-13. Run tests!
+11. Run tests!
 ``` bash
 # in dir parser/
 $ pytest -s .
@@ -230,7 +178,7 @@ We successfully generated a test where we can assert that an error was raised.
 Importing and assigning these functions everytime we generate tests is annoying, a feature to **remove** this labour is **WIP**.
 
 ### Let's add deserialization functionality to our serializer
-14. Add a ``de_serialize`` function to convert data back into a string.
+12. Add a ``de_serialize`` function to convert data back into a string.
 ``` python
 # parser/serializer.py
 from functools import reduce  # add this
@@ -247,7 +195,7 @@ def serialize(string):
 def de_serialize(array):
     return reduce(lambda a, b: f'{a},{b}', array)
 ```
-15. Define tests for this function
+13. Define tests for this function
 ``` yaml
 # WARNING: This is a new ymal file! test_de_serialize not test_serialize
 # parser/test_de_serialize.yaml
@@ -263,15 +211,18 @@ tests:
         func: "assert_string"
         arg: "\"hello, world\""
 ```
-16. Add new assert function in our config
+14. Add new assert function in our config
 ``` yaml
 # parser/config.yaml
 ---
+import_string: "from parser import serializer"
+serialize_function: "serializer.serialize"
+de_serialize_function: "serializer.de_serialize"
 assert_functions:
   - assert_list_entries
-  - assert_string
+  - assert_string # this
 ```
-17. Define the function in the commons file
+15. Define the function in the commons file
 ``` python
 # parser/tests/commons.py
 def assert_list_entries(a, b):
@@ -284,67 +235,15 @@ def assert_list_entries(a, b):
 def assert_string(a, b):
     return a == b
 ```
-18. Generate tests
+16. Generate tests
 ``` bash
 # in dir parser
 $ parserkiosk . --builtin python
 $ ls tests/
 commons.py  __init__.py  __pycache__  test_de_serialize.py  test_serialize.py
 ```
-19. Assign functions (1/2)
-``` python 
-# parser/tests/test_serialize.py
-from parser.serializer import serialize # here
-from .commons import (
-    assert_list_entries,
-    assert_string,
 
-)
-
-# ASSIGN ME
-SERIALIZE_FUNC = serialize # here
-
-def test_something():
-    '''
-    Example Test
-    '''
-    data = "hello, world"
-    serialized_data = SERIALIZE_FUNC(data)
-    assert assert_list_entries(serialized_data, ["hello", " world"])
-
-def test_error_less_than_two_comma_entries():
-    '''
-    Should raise an error when given a string without any comma separated values
-    '''
-    data = "helloworld"
-    try:
-        serialized_data = SERIALIZE_FUNC(data)
-        assert False
-    except Exception as e:
-        pass
-```
-20. Assign functions (2/2)
-``` python
-# parser/tests/test_de_serialize.py
-from parser.serializer import de_serialize
-from .commons import (
-    assert_list_entries,
-    assert_string,
-
-)
-
-# ASSIGN ME
-DE_SERIALIZE_FUNC = de_serialize
-
-def test_de_serialize():
-    '''
-    Should return a string of words separated by commas
-    '''
-    data = ["hello", " world"]
-    serialized_data = DE_SERIALIZE_FUNC(data)
-    assert assert_string(serialized_data, "hello, world")
-```
-21. Run tests!
+17. Run tests!
 ``` bash
 ============================================= test session starts ==============================================
 platform linux -- Python 3.10.2, pytest-7.0.1, pluggy-1.0.0
