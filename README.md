@@ -38,7 +38,7 @@ tests:
 ```
 4. Run parserkiosk in the same directory as ```config.yaml``` and ``test_serialize.yaml``
 ``` bash
-$ parserkiosk . --builtin python # can be any builtin template
+$ parserkiosk . --builtin python
 ```
 5. See output directory ```tests/```
 ``` bash
