@@ -44,7 +44,7 @@ test_serialize.py
 ```
 
 
-See [HOWTO](HOWTO.md) for a complete guide.
+#### See [HOWTO](HOWTO.md) for a complete guide.
 
 ### How does it work?
 Parserkiosk uses ``jinja2`` templates to generate test cases from ``yaml`` file(s). You can either expect something to fail(raise an "exception" or "error") or use a function that you define in a special file called ```commons``` to assert if the parsed data matches the expected internal representation. 
