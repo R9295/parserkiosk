@@ -172,7 +172,6 @@ tests/test_serialize.py ..
 ============================================== 2 passed in 0.01s ===============================================
 ```
 We successfully generated a test where we can assert that an error was raised.  
-Importing and assigning these functions everytime we generate tests is annoying, a feature to **remove** this labour is **WIP**.
 
 ### Let's add deserialization functionality to our serializer
 12. Add a ``de_serialize`` function to convert data back into a string.
