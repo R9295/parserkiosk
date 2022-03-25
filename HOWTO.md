@@ -29,7 +29,6 @@ pip install parserkiosk pytest
 ---
 import_string: "from parser import serializer"
 serialize_function: "serializer.serialize"
-de_serialize_function: "serializer.de_serialize" # for the future :)
 assert_functions:
   - assert_list_entries
 ```
@@ -209,13 +208,13 @@ tests:
         func: "assert_string"
         arg: "\"hello, world\""
 ```
-14. Add new assert function in our config
+14. Add new assert function, and de_serializer function in our config
 ``` yaml
 # parser/config.yaml
 ---
 import_string: "from parser import serializer"
 serialize_function: "serializer.serialize"
-de_serialize_function: "serializer.de_serialize"
+de_serialize_function: "serializer.de_serialize" # this
 assert_functions:
   - assert_list_entries
   - assert_string # this
