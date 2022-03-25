@@ -1,3 +1,4 @@
+import pytest
 {{ import_string }}
 from .commons import (
     {% for func in assert_funcs -%}
@@ -21,12 +22,12 @@ def {{t_name}}():
     data = "{{ t.input.arg }}"
     {%- endif %}
     {% if t.assert.func != "fail" -%}
-            serialized_data = {{func}}(data)
+    serialized_data = {{func}}(data)
     assert {{ t.assert.func }}(serialized_data, {{ t.assert.arg }})
     {% else -%}
     try:
         serialized_data = {{ func }}(data)
-        assert False
+        pytest.fail()
     except Exception as e:
         {%- if t.assert.get('arg') != None %}
        assert str(e) == '{{t.assert.arg}}'
