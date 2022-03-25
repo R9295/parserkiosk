@@ -29,7 +29,7 @@ pip install parserkiosk pytest
 ---
 import_string: "from parser import serializer"
 serialize_function: "serializer.serialize"
-de_serialize_function: "serializer.de_serialize"
+de_serialize_function: "serializer.de_serialize" # for the future :)
 assert_functions:
   - assert_list_entries
 ```
