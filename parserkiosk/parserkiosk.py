@@ -19,13 +19,15 @@ import argparse
 import glob
 import os
 from importlib import resources as pkg_resources
-from typing import Any, Dict
+from typing import Any, Dict, List, Union
 
 import jinja2
+import yamale
 from box import Box
 from yaml import load as load_yaml
 
 from .colors import print_error, print_success
+from .schema import config_schema, test_schema
 
 try:
     from yaml import CLoader as YamlLoader
@@ -54,8 +56,8 @@ def get_ext(template_name: str) -> str:
 
 def generate_test(
     filename: str,
-    tests: Dict[str, Any],
-    config: Dict[str, Any],
+    tests: Box,
+    config: Box,
     template: jinja2.Template,
     ext: str,
 ) -> None:
@@ -78,9 +80,13 @@ def generate_test(
         return generate_test(filename, tests, config, template, ext)
 
 
-def read_yaml(filename) -> Dict[str, Any]:
+def read_yaml(filename, validation_schema=None) -> Box:
     with open(filename, 'r') as file:
-        return Box(load_yaml(file.read(), Loader=YamlLoader))
+        content = file.read()
+        if validation_schema:
+            data = yamale.make_data(content=content)
+            yamale.validate(validation_schema, data)
+    return Box(load_yaml(content, Loader=YamlLoader))
 
 
 def validate_cli_args(args) -> None:
@@ -96,6 +102,25 @@ def validate_cli_args(args) -> None:
         raise Exception(
             'Need an --ext parameter when using a custom template.'
         )
+
+
+def parse_tests(
+    tests: List[str],
+) -> Union[None, List[Dict[str, Union[str, Box]]]]:
+    parsed_tests = []
+    for test in tests:
+        try:
+            parsed_tests.append(
+                {
+                    'name': test.split('/')[-1].replace('.yaml', ''),
+                    'tests': read_yaml(test, validation_schema=test_schema),
+                }
+            )
+        except yamale.YamaleError as e:
+            print_error(f'Error(s) in {test}:')
+            print_error(str(e))
+            return
+    return parsed_tests
 
 
 def main() -> None:
@@ -132,19 +157,26 @@ def main() -> None:
     except Exception as e:
         print_error(e)
         return
-    config = read_yaml(os.path.join(args.dir, 'config.yaml'))
-    tests = glob.glob(f'{args.dir}/test_*.yaml')
+    test_files = glob.glob(f'{args.dir}/test_*.yaml')
     template = get_template(
         args.builtin or args.path, args.builtin is not None
     )
-    for test in tests:
-        test_yaml = read_yaml(test)
-        test_file_name = test.split('/')[-1].replace('.yaml', '')
-        generate_test(
-            test_file_name,
-            test_yaml,
-            config,
-            template,
-            ext,
+    try:
+        config = read_yaml(
+            os.path.join(args.dir, 'config.yaml'),
+            config_schema,
         )
-    print_success('Done')
+    except yamale.YamaleError as e:
+        print_error('Error(s) in config.yaml:')
+        print_error(str(e))
+        return
+    if parsed_tests := parse_tests(test_files):
+        for test in parsed_tests:
+            generate_test(
+                test.get('name'),
+                test.get('tests'),
+                config,
+                template,
+                ext,
+            )
+        print_success('Done')

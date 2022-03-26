@@ -553,10 +553,21 @@ category = "dev"
 optional = false
 python-versions = "*"
 
+[[package]]
+name = "yamale"
+version = "4.0.4"
+description = "A schema and validator for YAML."
+category = "main"
+optional = false
+python-versions = ">=3.6"
+
+[package.dependencies]
+pyyaml = "*"
+
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.10"
-content-hash = "32deaf2d5df5149237002cd36af53486b824ed74c4e716a575477ff4c0777585"
+content-hash = "f94106cba1ffefc7826ab0da37fce71d6474523974c7fbea6501adea51774f62"
 
 [metadata.files]
 appnope = [
@@ -887,4 +898,8 @@ ujson = [
 wcwidth = [
     {file = "wcwidth-0.2.5-py2.py3-none-any.whl", hash = "sha256:beb4802a9cebb9144e99086eff703a642a13d6a0052920003a230f3294bbe784"},
     {file = "wcwidth-0.2.5.tar.gz", hash = "sha256:c4d647b99872929fdb7bdcaa4fbe7f01413ed3d98077df798530e5b04f116c83"},
+]
+yamale = [
+    {file = "yamale-4.0.4-py3-none-any.whl", hash = "sha256:04f914c0886bda03ac20f8468272cfd9374a634a062549490eff2beedeb30497"},
+    {file = "yamale-4.0.4.tar.gz", hash = "sha256:e524caf71cbbbd15aa295e8bdda01688ac4b5edaf38dd60851ddff6baef383ba"},
 ]

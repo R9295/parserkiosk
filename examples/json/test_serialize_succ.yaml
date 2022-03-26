@@ -3,6 +3,7 @@
 type: "SERIALIZE"
 tests:
     test_object_long_strings:
+        info: ""
         input:
             type: "str"
             arg: ""
@@ -10,13 +11,15 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicodeEscapedBackslash:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_unicodeEscapedBackslash.json"
         assert:
             func: "compare_list"
             arg: ""
     test_number_int_with_exp:
+        info: ""
         input:
             type: "str"
             arg: "[20e1]"
@@ -24,6 +27,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_with_trailing_space:
+        info: ""
         input:
             type: "str"
             arg: "[2] "
@@ -31,13 +35,15 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_double_escape_a:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_double_escape_a.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_number_negative_one:
+        info: ""
         input:
             type: "str"
             arg: "[-1]"
@@ -45,6 +51,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_real_capital_e:
+        info: ""
         input:
             type: "str"
             arg: "[1E22]"
@@ -52,13 +59,15 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_allowed_escapes:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg:  "y_string_allowed_escapes.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_structure_true_in_array:
+        info: ""
         input:
             type: "str"
             arg: "[true]"
@@ -66,6 +75,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_lonely_negative_real:
+        info: ""
         input:
             type: "str"
             arg: "-0.1"
@@ -73,27 +83,31 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_with_newlines:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_object_with_newlines.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_U_plus_1FFFE_nonchar:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_unicode_U_plus_1FFFE_nonchar.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_string_nonCharacterInUTF_minus_8_U_plus10FFFF:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_nonCharacterInUTF_minus_8_U_plus10FFFF.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_number_real_exponent:
+        info: ""
         input:
             type: "str"
             arg: "[123e45]"
@@ -101,6 +115,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_duplicated_key:
+        info: ""
         input:
             type: "file"
             arg: "y_object_duplicated_key.json"
@@ -108,6 +123,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_basic:
+        info: ""
         input:
             type: "file"
             arg: "y_object_basic.json"
@@ -115,13 +131,15 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_last_surrogates_1_and_2:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_last_surrogates_1_and_2.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_number_real_pos_exponent:
+        info: ""
         input:
             type: "str"
             arg: "[1e+2]"
@@ -129,27 +147,31 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_U_plus_FFFE_nonchar:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_unicode_U_plus_FFFE_nonchar.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_string_uEscape:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_uEscape.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_string_two_byte_utf_8:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_two_byte_utf_8.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_string_in_array_with_leading_space:
+        info: ""
         input:
             type: "file"
             arg: "y_string_in_array_with_leading_space.json"
@@ -157,6 +179,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_with_1_and_newline:
+        info: ""
         input:
             type: "file"
             arg: "y_array_with_1_and_newline.json"
@@ -164,6 +187,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_real_capital_e_neg_exp:
+        info: ""
         input:
             type: "str"
             arg: "[1E-2]"
@@ -171,13 +195,15 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_escaped_control_character:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_escaped_control_character.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_array_with_leading_space:
+        info: ""
         input:
             type: "str"
             arg: " [1]"
@@ -185,13 +211,15 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_one_byte_utf_8:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_one_byte_utf_8.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_number_real_fraction_exponent:
+        info: ""
         input:
             type: "str"
             arg: "[123.456e78]"
@@ -199,6 +227,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_extreme_numbers:
+        info: ""
         input:
             type: "file"
             arg: "y_object_extreme_numbers.json"
@@ -206,6 +235,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_duplicated_key_and_value:
+        info: ""
         input:
             type: "file"
             arg: "y_object_duplicated_key_and_value.json" 
@@ -213,6 +243,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_empty:
+        info: ""
         input:
             type: "str"
             arg: "[]"
@@ -220,6 +251,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_heterogeneous:
+        info: ""
         input:
             type: "file"
             arg: "y_array_heterogeneous.json"
@@ -227,6 +259,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_double_close_to_zero:
+        info: ""
         input:
             type: "str"
             arg: ""
@@ -234,20 +267,23 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_pi:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_pi.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_escaped_double_quote:
+        info: ""
         input:
-            "type": "file"
+            type: "file"
             arg: "y_string_unicode_escaped_double_quote.json"
         assert:
             func: "compare_dict"
             arg: "\"\""
     test_array_empty_string:
+        info: ""
         input:
             type: "file"
             arg: "y_array_empty_string.json"
@@ -255,6 +291,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_false:
+        info: ""
         input:
             type: "str"
             arg: "[false]"
@@ -262,6 +299,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_U_plus_2064_invisible_plus:
+        info: ""
         input:
             type: "file"
             arg: "y_string_unicode_U_plus_2064_invisible_plus.json"
@@ -269,6 +307,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_string_unicode:
+        info: ""
         input:
             type: "str"
             arg: ""
@@ -276,6 +315,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_escaped_null_in_key:
+        info: ""
         input:
             type: "file"
             arg: "y_object_escaped_null_in_key.json"
@@ -283,6 +323,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_simple_ascii:
+        info: ""
         input:
             type: "file"
             arg: "y_string_simple_ascii.json"
@@ -290,6 +331,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_U_plus_FDD0_nonchar:
+        info: ""
         input:
             type: "file"
             arg: "y_string_unicode_U_plus_FDD0_nonchar.json"
@@ -297,6 +339,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_nonCharacterInUTF_8_U_plus_FFFF:
+        info: ""
         input:
             type: "file"
             arg: "y_string_nonCharacterInUTF_8_U_plus_FFFF.json"
@@ -304,6 +347,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_0e_plus_1:
+        info: ""
         input:
             type: "str"
             arg: "[0e+1]"
@@ -311,6 +355,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unescaped_char_delete:
+        info: ""
         input:
             type: "file"
             arg: "y_string_unescaped_char_delete.json"
@@ -318,6 +363,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_real_capital_e_pos_exp:
+        info: ""
         input:
             type: "str"
             arg: "[1E+2]"
@@ -325,6 +371,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_U_plus_200B_ZERO_WIDTH_SPACE:
+        info: ""
         input:
             type: "file"
             arg: "y_string_unicode_U_plus_200B_ZERO_WIDTH_SPACE.json"
@@ -332,6 +379,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_u_plus_2028_line_sep:
+        info: ""
         input:
             type: "file"
             arg: "y_string_u_plus_2028_line_sep.json"
@@ -339,6 +387,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_accepted_surrogate_pair:
+        info: ""
         input:
             type: "file"
             arg: "y_string_accepted_surrogate_pair.json"
@@ -346,6 +395,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_empty_key:
+        info: ""
         input:
             type: "file"
             arg: "y_object_empty_key.json"
@@ -353,6 +403,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_simple_real:
+        info: ""
         input:
             type: "str"
             arg: "[123.456789]"
@@ -360,6 +411,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_uescaped_newline:
+        info: ""
         input:
             type: "file"
             arg: "y_string_uescaped_newline.json"
@@ -367,6 +419,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_backslash_doublequotes:
+        info: ""
         input:
             type: "file"
             arg: "y_string_backslash_doublequotes.json"
@@ -374,6 +427,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object:
+        info: ""
         input:
             type: "file"
             arg: "y_object.json"
@@ -381,6 +435,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_utf8:
+        info: ""
         input:
             type: "file"
             arg: "y_string_utf8.json"
@@ -388,6 +443,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_string_empty:
+        info: ""
         input:
             type: "str"
             arg: ""
@@ -395,6 +451,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_null_escape:
+        info: ""
         input:
             type: "file"
             arg: "y_string_null_escape.json"
@@ -402,6 +459,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_space:
+        info: ""
         input:
             type: "str"
             arg: " "
@@ -409,6 +467,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_with_several_null:
+        info: ""
         input:
             type: "str"
             arg: "[1,null,null,null,2]"
@@ -416,6 +475,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_negative_int:
+        info: ""
         input:
             type: "str"
             arg: "[-123]"
@@ -423,6 +483,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_lonely_false:
+        info: ""
         input:
             type: "str"
             arg: "false"
@@ -430,6 +491,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_accepted_surrogate_pairs:
+        info: ""
         input:
             type: "file"
             arg: "y_string_accepted_surrogate_pairs.json"
@@ -437,6 +499,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_three_byte_utf_8:
+        info: ""
         input:
             type: "file"
             arg: "y_string_three_byte_utf_8.json"
@@ -444,6 +507,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_lonely_null:
+        info: ""
         input:
             type: "str"
             arg: "null"
@@ -451,6 +515,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_lonely_true:
+        info: ""
         input:
             type: "str"
             arg: "true"
@@ -458,6 +523,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_in_array:
+        info: ""
         input:
             type: "file"
             arg: "y_string_in_array.json"
@@ -465,6 +531,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_U_plus_10FFFE_nonchar:
+        info: ""
         input:
             type: "file"
             arg: "y_string_unicode_U_plus_10FFFE_nonchar.json"
@@ -472,6 +539,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode_2:
+        info: ""
         input:
             type: "file"
             arg: "y_string_unicode_2.json"
@@ -479,6 +547,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number:
+        info: ""
         input:
             type: "str"
             arg: "[123e65]"
@@ -486,6 +555,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_null:
+        info: ""
         input:
             type: "str"
             arg: "[null]"
@@ -493,6 +563,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_double_escape_n:
+        info: ""
         input:
             type: "file"
             arg: "y_string_double_escape_n.json"
@@ -500,6 +571,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_lonely_int:
+        info: ""
         input:
             type: "str"
             arg: "42"
@@ -507,6 +579,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_backslash_and_u_escaped_zero:
+        info: ""
         input:
             type: "file"
             arg: "y_string_backslash_and_u_escaped_zero.json"
@@ -514,6 +587,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_escaped_noncharacter:
+        info: ""
         input:
             type: "file"
             arg: "y_string_escaped_noncharacter.json"
@@ -521,6 +595,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_with_del_character:
+        info: ""
         input:
             type: "file"
             arg: "y_string_with_del_character.json"
@@ -528,6 +603,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_empty:
+        info: ""
         input:
             type: "str"
             arg: "{}"
@@ -535,6 +611,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_nbsp_uescaped:
+        info: ""
         input:
             type: "file"
             arg: "y_string_nbsp_uescaped.json"
@@ -542,6 +619,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_reservedCharacterInUTF_8_U_plus_1BFFF:
+        info: ""
         input:
             type: "file"
             arg: "y_string_reservedCharacterInUTF_8_U_plus_1BFFF.json"
@@ -549,6 +627,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_real_neg_exp:
+        info: ""
         input:
             type: "str"
             arg: "[1e-2]"
@@ -556,6 +635,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_1_2_3_bytes_UTF_8_sequences:
+        info: ""
         input:
             type: "file"
             arg: "y_string_1_2_3_bytes_UTF_8_sequences.json"
@@ -563,6 +643,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_arraysWithSpaces:
+        info: ""
         input:
             type: "str"
             arg: "[[]   ]"
@@ -570,6 +651,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_minus_zero:
+        info: ""
         input:
             type: "str"
             arg: "[-0]"
@@ -577,6 +659,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_trailing_newline:
+        info: ""
         input:
             type: "file"
             arg: "y_structure_trailing_newline.json"
@@ -584,6 +667,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_surrogates_U_plus_1D11E_MUSICAL_SYMBOL_G_CLEF:
+        info: ""
         input:
             type: "file"
             arg: "y_string_surrogates_U_plus_1D11E_MUSICAL_SYMBOL_G_CLEF.json"
@@ -591,6 +675,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_lonely_string:
+        info: ""
         input:
             type: "str"
             arg: "asd"
@@ -598,6 +683,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_structure_whitespace_array:
+        info: ""
         input:
             type: "str"
             arg: " [] "
@@ -605,6 +691,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_unicode:
+        info: ""
         input:
             type: "file"
             arg: "y_string_unicode.json"
@@ -612,6 +699,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_0e1:
+        info: ""
         input:
             type: "str"
             arg: "[0e1]"
@@ -619,6 +707,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_object_simple:
+        info: ""
         input:
             type: "file"
             arg: "y_object_simple.json"
@@ -626,6 +715,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_array_ending_with_newline:
+        info: ""
         input:
             type: "file"
             arg: "y_array_ending_with_newline.json"
@@ -633,6 +723,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_u_plus_2029_par_sep:
+        info: ""
         input:
             type: "file"
             arg: "y_string_u_plus_2029_par_sep.json"
@@ -640,6 +731,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_negative_zero:
+        info: ""
         input:
             type: "str"
             arg: "[-0]"
@@ -647,6 +739,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_after_space:
+        info: ""
         input:
             type: "str"
             arg: "[ 4]"
@@ -654,6 +747,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_number_simple_int:
+        info: ""
         input:
             type: "str"
             arg: "[123]"
@@ -661,6 +755,7 @@ tests:
             func: "compare_dict"
             arg: "\"\""
     test_string_comments:
+        info: ""
         input:
             type: "file"
             arg: "y_string_comments.json"
