@@ -39,6 +39,7 @@ python = "^3.10"
 PyYAML = "^6.0"
 python-box = "^5.4.1"
 Jinja2 = "^3.0.3"
+yamale = "^4.0.4"
 
 [tool.poetry.dev-dependencies]
 black = "^22.1.0"
