@@ -9,13 +9,11 @@ class TestAssertValidator(Validator):
     tag = 'assert_validator'
 
     def _is_valid(self, value: Dict[str, Any]) -> bool:
-        valid = True
         func = value.get('func')
         if len(value.keys()) > 2 or not func or type(func) != str:
             return False
         if func != 'fail':
-            valid = value.get('arg') is not None
-        return valid
+            return value.get('arg') is not None
 
 
 config_schema = make_schema(
