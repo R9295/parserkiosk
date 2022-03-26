@@ -48,6 +48,7 @@ flake8 = "^4.0.1"
 python-lsp-server = "^1.3.3"
 ipdb = "^0.13.9"
 pytest = "^7.0.1"
+pre-commit = "^2.17.0"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -65,8 +66,10 @@ exclude = '''
   | \.lock
   | \.md
   | \.env
+  | \.examples*
 )/
 '''
 
 [tool.isort]
 profile = "black"
+
