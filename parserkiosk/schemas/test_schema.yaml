@@ -1,0 +1,11 @@
+type: any(str(equals="DE_SERIALIZE"), str(equals="SERIALIZE"))
+tests: map(str(starts_with="test_"), include('test'))
+---
+input:
+    type: any(str(equals="raw"), str(equals="str"), str(equals="file"))
+    arg: str()
+assert: assert_validator()
+test:
+    info: str()
+    input: include('input')
+    assert: include('assert')

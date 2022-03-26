@@ -1,9 +1,11 @@
+from importlib import resources as pkg_resources
 from typing import Any, Dict
 
-import yamale
+from yamale import make_schema
+from yamale.validators import DefaultValidators, Validator
 
 
-class TestAssertValidator(yamale.validators.Validator):
+class TestAssertValidator(Validator):
     tag = 'assert_validator'
 
     def _is_valid(self, value: Dict[str, Any]) -> bool:
@@ -16,35 +18,16 @@ class TestAssertValidator(yamale.validators.Validator):
         return valid
 
 
-config_schema = yamale.make_schema(
-    content='''
-import_string: str()
-serialize_function: str(required=False)
-de_serialize_function: str(required=False)
-assert_functions: list(str())
-'''
+config_schema = make_schema(
+    content=pkg_resources.read_text(
+        'parserkiosk.schemas', 'config_schema.yaml'
+    )
 )
 
-validators = yamale.validators.DefaultValidators.copy()
+validators = DefaultValidators.copy()
 validators[TestAssertValidator.tag] = TestAssertValidator
 
-
-test_schema = yamale.make_schema(
-    content='''
-type: any(str(equals="DE_SERIALIZE"), str(equals="SERIALIZE"))
-tests: map(str(starts_with="test_"), include('test'))
----
-
-input:
-    type: any(str(equals="raw"), str(equals="str"), str(equals="file"))
-    arg: str()
-
-assert: assert_validator()
-
-test:
-    info: str()
-    input: include('input')
-    assert: include('assert')
-''',
+test_schema = make_schema(
+    content=pkg_resources.read_text('parserkiosk.schemas', 'test_schema.yaml'),
     validators=validators,
 )
