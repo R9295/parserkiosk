@@ -56,8 +56,8 @@ def get_ext(template_name: str) -> str:
 
 def generate_test(
     filename: str,
-    tests: Dict[str, Any],
-    config: Dict[str, Any],
+    tests: Box,
+    config: Box,
     template: jinja2.Template,
     ext: str,
 ) -> None:
@@ -80,7 +80,7 @@ def generate_test(
         return generate_test(filename, tests, config, template, ext)
 
 
-def read_yaml(filename, validation_schema=None) -> Dict[str, Any]:
+def read_yaml(filename, validation_schema=None) -> Box:
     with open(filename, 'r') as file:
         content = file.read()
         if validation_schema:
@@ -104,7 +104,7 @@ def validate_cli_args(args) -> None:
         )
 
 
-def parse_tests(tests: List[str]) -> Union[None, List[Dict[str, Any]]]:
+def parse_tests(tests: List[str]) -> Union[None, List[Dict[str, Union[str, Box]]]]:
     parsed_tests = []
     for test in tests:
         try:
