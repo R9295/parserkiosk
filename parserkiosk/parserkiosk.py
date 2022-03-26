@@ -19,7 +19,7 @@ import argparse
 import glob
 import os
 from importlib import resources as pkg_resources
-from typing import Any, Dict
+from typing import Any, Dict, List, Union
 
 import jinja2
 import yamale
@@ -104,6 +104,23 @@ def validate_cli_args(args) -> None:
         )
 
 
+def parse_tests(tests: List[str]) -> Union[None, List[Dict[str, Any]]]:
+    parsed_tests = []
+    for test in tests:
+        try:
+            parsed_tests.append(
+                {
+                    'name': test.split('/')[-1].replace('.yaml', ''),
+                    'tests': read_yaml(test, validation_schema=test_schema),
+                }
+            )
+        except yamale.YamaleError as e:
+            print_error(f'Error(s) in {test}:')
+            print_error(str(e))
+            return
+    return parsed_tests
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(
         description='''Generate test suites for parsers in multiple languages.'''  # noqa E501
@@ -138,7 +155,7 @@ def main() -> None:
     except Exception as e:
         print_error(e)
         return
-    tests = glob.glob(f'{args.dir}/test_*.yaml')
+    test_files = glob.glob(f'{args.dir}/test_*.yaml')
     template = get_template(
         args.builtin or args.path, args.builtin is not None
     )
@@ -151,19 +168,13 @@ def main() -> None:
         print_error('Error(s) in config.yaml:')
         print_error(str(e))
         return
-    for test in tests:
-        try:
-            test_yaml = read_yaml(test, test_schema)
-        except yamale.YamaleError as e:
-            print_error(f'Error(s) in {test}:')
-            print_error(str(e))
-            return
-        test_file_name = test.split('/')[-1].replace('.yaml', '')
-        generate_test(
-            test_file_name,
-            test_yaml,
-            config,
-            template,
-            ext,
-        )
-    print_success('Done')
+    if parsed_tests := parse_tests(test_files):
+        for test in parsed_tests:
+            generate_test(
+                test.get('name'),
+                test.get('tests'),
+                config,
+                template,
+                ext,
+            )
+        print_success('Done')
