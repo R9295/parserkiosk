@@ -33,7 +33,7 @@ tests:
         type: "str"
         arg: "hello, world"
       assert:
-        func: "assert_list_entries"
+        func: "my_assert_function"
         arg: "[\"hello\", \" world\"]"
 ```
 4. Run parserkiosk in the same directory as ```config.yaml``` and ``test_serialize.yaml``
