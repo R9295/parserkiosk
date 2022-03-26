@@ -1,6 +1,6 @@
 MIT License
 
-Copyright (c) 2016 Nicolas Seriot
+Copyright (c) 2016 Nicolas Seriot  
 Copyright (c) 2022 Aarnav Bos
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
