@@ -77,6 +77,13 @@ All work is licensed under ```GPL-3.0``` excluding the example JSON test-suite w
 
 ### Contributing
 Issues, feedback and pull requests are welcome. I have tried _my best_ to keep the code simple. Please keep in mind that I wish to limit features that we accomodate to keep it simple. Tests should be simple and readable.
-
+### Installing for development:
+```
+$ git clone https://github.com/you/your-fork-of-parserkiosk.git
+$ cd your-fork-of-parserkiosk
+$ poetry install
+$ poetry run pre-commit install
+# you are ready!
+```
 ### Thanks
 Special thanks to [nst](https://github.com/nst/) for inspiring Parserkiosk. All test cases in ``examples/json`` come from his [incredible work](https://github.com/nst/JSONTestSuite)
