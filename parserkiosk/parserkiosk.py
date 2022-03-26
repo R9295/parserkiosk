@@ -19,7 +19,7 @@ import argparse
 import glob
 import os
 from importlib import resources as pkg_resources
-from typing import Any, Dict, List, Union
+from typing import Dict, List, Union
 
 import jinja2
 import yamale

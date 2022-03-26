@@ -14,7 +14,7 @@ class TestAssertValidator(Validator):
             return False
         if func != 'fail':
             return value.get('arg') is not None
-
+        return True
 
 config_schema = make_schema(
     content=pkg_resources.read_text(
