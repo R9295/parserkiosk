@@ -104,7 +104,9 @@ def validate_cli_args(args) -> None:
         )
 
 
-def parse_tests(tests: List[str]) -> Union[None, List[Dict[str, Union[str, Box]]]]:
+def parse_tests(
+    tests: List[str],
+) -> Union[None, List[Dict[str, Union[str, Box]]]]:
     parsed_tests = []
     for test in tests:
         try:
