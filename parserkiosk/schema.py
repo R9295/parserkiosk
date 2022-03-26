@@ -7,13 +7,22 @@ from yamale.validators import DefaultValidators, Validator
 
 class TestAssertValidator(Validator):
     tag = 'assert_validator'
+    _err = ''
 
     def _is_valid(self, value: Dict[str, Any]) -> bool:
         func = value.get('func')
         if len(value.keys()) > 2 or not func or type(func) != str:
+            self._err = 'Too many keys provided. Need only "func" and "arg"'
             return False
-        if func != 'fail':
-            return value.get('arg') is not None
+        if func != 'fail' and value.get('arg') is None:
+            self._err = (
+                'Need to provide an "arg" value if "func" is not "fail"'
+            )
+            return False
+        return True
+
+    def fail(self, value):
+        return self._err
 
 
 config_schema = make_schema(
