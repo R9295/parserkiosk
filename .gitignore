@@ -4,3 +4,4 @@ parserkiosk.egg-info*
 build/*
 dist/*
 .publish
+.coverage

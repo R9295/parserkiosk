@@ -1,5 +1,5 @@
-from . import parserkiosk, templates
+from . import parserkiosk, schemas, templates
 
 main = parserkiosk.main
 
-__all__ = ["main", "templates"]
+__all__ = ['main', 'templates', 'schemas']

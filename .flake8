@@ -1,0 +1,19 @@
+[flake8]
+max-line-length = 79
+exclude =
+    examples
+    .git
+    __pycache__
+    setup.py
+    build
+    dist
+    *.lock
+    *.toml
+    *.yaml
+    *.yml
+    .flake8
+    *.md
+    *.sh
+    Dockerfile
+    .gitignore
+    .coveragerc

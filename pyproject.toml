@@ -49,6 +49,7 @@ python-lsp-server = "^1.3.3"
 ipdb = "^0.13.9"
 pytest = "^7.0.1"
 pre-commit = "^2.17.0"
+coverage = {extras = ["toml"], version = "^6.3.2"}
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
@@ -72,4 +73,9 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
+
+[tool.coverage.run]
+omit = [
+    'tests/*',
+]
 
