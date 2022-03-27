@@ -144,6 +144,7 @@ assert_functions:
   - asdf
 ''',
     )
+    # need to patch importlib as filesystem is faked so it won't find builtin template  # noqa E501
     with patch('importlib.resources.read_text') as patched_importlib:
         patched_importlib.return_value = '{{ import_string }}'
         with patch('sys.argv', default_cli_args):
@@ -159,6 +160,7 @@ def test_invalid_test(fs, capsys):
         'test_asdf.yaml',
         contents=default_test_yaml.replace('type: "SERIALIZE"', ''),
     )
+    # need to patch importlib as filesystem is faked so it won't find builtin template  # noqa E501
     with patch('importlib.resources.read_text') as patched_importlib:
         patched_importlib.return_value = '{{ import }}'
         with patch('sys.argv', default_cli_args):
