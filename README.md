@@ -3,7 +3,9 @@
 ![](https://img.shields.io/github/commit-activity/w/R9295/parserkiosk?style=flat-square)
 ![](https://img.shields.io/github/issues/R9295/parserkiosk?style=flat-square)
 ![](https://img.shields.io/pypi/v/parserkiosk?style=flat-square)
+![](https://pepy.tech/badge/parserkiosk)
 ![](https://img.shields.io/pypi/format/parserkiosk?style=flat-square)
+![](https://img.shields.io/badge/code%20style-black-000000.svg)
 
 ### Motivation
 After reading this [article](https://seriot.ch/projects/parsing_json.html) and [this one](https://bishopfox.com/blog/json-interoperability-vulnerabilities), I am now paranoid and under the assumption that implementations of data serialization and deserialization have a lot of quirks that differ from language to language, and implementation to implementation.
