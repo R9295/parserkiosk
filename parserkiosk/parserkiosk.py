@@ -90,10 +90,10 @@ def read_yaml(filename, validation_schema=None) -> Box:
 
 
 def validate_cli_args(args) -> None:
-    if not os.path.exists(os.path.join(args.dir, 'config.yaml')):
-        raise Exception('No config found in directory provided')
     if not os.path.isdir(args.dir):
         raise Exception('The dir provided is not a directory!')
+    if not os.path.exists(os.path.join(args.dir, 'config.yaml')):
+        raise Exception('No config found in directory provided')
     if args.builtin and args.path:
         raise Exception('Cannot generate two test-suites at a time.')
     elif not args.builtin and not args.path:
