@@ -90,6 +90,8 @@ $ git clone https://github.com/you/your-fork-of-parserkiosk.git
 $ cd your-fork-of-parserkiosk
 $ poetry install
 $ poetry run pre-commit install
+# do some changes
+$ ./runtests.sh
 # you are ready!
 ```
 ### Thanks
