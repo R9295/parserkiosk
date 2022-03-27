@@ -1,3 +1,5 @@
+import jinja2
+
 from parserkiosk import parserkiosk
 
 TEMPLATE_NAME = 'python'
@@ -10,4 +12,4 @@ def test_correct_ext_from_template():
 
 def test_correct_template_from_path():
     template = parserkiosk.get_template(TEMPLATE_NAME, is_builtin=True)
-    assert template is not None
+    assert isinstance(template, jinja2.Template)
