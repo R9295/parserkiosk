@@ -1,0 +1,42 @@
+---
+name: Parserkiosk QA CI
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  run_tests:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: init
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
+    
+      - name: setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.10
+    
+      - name: install poetry
+        uses: snok/install-poetry@v1.3.1
+        with:
+            virtualenvs-create: true
+            virtualenvs-in-project: true
+            installer-parallel: true
+
+      - name: install deps
+        run: poetry install --no-interaction --no-root
+      
+      - name: run tests
+        run: ./runtests.sh
+
+      - name: upload coverage
+        uses: coverallsapp/github-action@master
+        with:
+          github-token: ${{ secrets.COVERALLS_TOKEN }}
