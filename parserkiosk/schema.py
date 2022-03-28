@@ -15,6 +15,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with this program.  If not, see <https://www.gnu.org/licenses/>.
 '''
+from functools import reduce
 from importlib import resources as pkg_resources
 from typing import Any, Dict
 
@@ -24,22 +25,37 @@ from yamale.validators import DefaultValidators, Validator
 
 class TestAssertValidator(Validator):
     tag = 'assert_validator'
-    _err = ''
+    _errors = []
 
     def _is_valid(self, value: Dict[str, Any]) -> bool:
         func = value.get('func')
-        if len(value.keys()) > 2 or not func or type(func) != str:
-            self._err = 'Too many keys provided. Need only "func" and "arg"'
-            return False
-        if func != 'fail' and value.get('arg') is None:
-            self._err = (
-                'Need to provide an "arg" value if "func" is not "fail"'
+        arg = value.get('arg')
+        if func is None:
+            self._errors.append('Missing "func"')
+        if len(value.keys()) > 2:
+            self._errors.append(
+                'Too many keys provided. Need only "func" and "arg"'
             )
-            return False
-        return True
+        if func != 'fail' and arg is None:
+            self._errors.append(
+                'Need to provide an "arg" if "func" is not "fail"'
+            )
+        else:
+            if type(arg) == dict:
+                if not arg.get('type'):
+                    self._errors.append('Missing "type" in assert.arg')
+                if arg.get('type') not in ['raw', 'file', 'str']:
+                    self._errors.append(
+                        'Invalid value for "type". Allowed: "raw", "file" or "str"'  # noqa E501
+                    )
+                if not arg.get('arg'):
+                    self._errors.append('Missing "arg"')
+        return len(self._errors) == 0
 
     def fail(self, value):
-        return self._err
+        error_text = reduce(lambda a, b: f'{a}\n{b}', self._errors)
+        self._errors = []
+        return error_text
 
 
 config_schema = make_schema(

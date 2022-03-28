@@ -1,50 +1,19 @@
 import os
 from unittest.mock import patch
 
-import jinja2
 import pytest
-from box import Box
-from yaml import load as load_yaml
 
 from parserkiosk import parserkiosk
 from parserkiosk.colors import CEND, CGREEN, CRED
 
-try:
-    from yaml import CLoader as YamlLoader
-except ImportError:
-    from yaml import Loader as YamlLoader
-
-from importlib import resources as pkg_resources
-
-default_cli_args = ['main', '.', '--builtin', 'python']
-path_cli_args = ['main', '.', '--path', 'mytemplate.jinja2', '--ext', 'asd']
-default_template = jinja2.Template(
-    pkg_resources.read_text('parserkiosk.templates', 'python.jinja2')
+from .utils import (
+    default_cli_args,
+    default_config_yaml,
+    default_template,
+    default_test_yaml,
+    parse_yaml,
+    path_cli_args,
 )
-default_test_yaml = '''---
-type: "SERIALIZE"
-tests:
-  test_something:
-      info: "Example Test"
-      input:
-        type: "str"
-        arg: "hello, world"
-      assert:
-        func: "my_assert_function"
-        arg: '["hello", " world"]'
-'''
-default_config_yaml = '''
----
-import_string: "from my_parser import serialize, deserialize"
-serialize_function: "serialize"
-de_serialize_function: "deserialize"
-assert_functions:
-  - my_assert_function
-'''
-
-
-def parse_yaml(string):
-    return Box(load_yaml(string, Loader=YamlLoader))
 
 
 def test_error_bad_template_name():

@@ -1,5 +1,5 @@
 type: any(str(equals="DE_SERIALIZE"), str(equals="SERIALIZE"))
-tests: map(str(starts_with="test_"), include('test'))
+tests: map(include('test'), key=str(starts_with="test_"))
 ---
 input:
     type: any(str(equals="raw"), str(equals="str"), str(equals="file"))
