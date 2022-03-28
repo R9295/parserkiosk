@@ -74,9 +74,10 @@ exclude = '''
 
 [tool.isort]
 profile = "black"
+extend_skip = [".jinja2"]
 
 [tool.coverage.run]
 omit = [
-    'tests/*',
+    "tests/*",
 ]
 

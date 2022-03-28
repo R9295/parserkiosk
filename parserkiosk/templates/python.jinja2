@@ -1,7 +1,11 @@
 import pytest
 
 {{ import_string }}
-from .commons import %}, -%}, assert_funcs, endfor, for, func, in, {%, {{ func }}
+from .commons import (  # isort: skip
+    {% for func in assert_funcs -%}
+    {{ func }},
+    {% endfor %}
+)
 
 {% for t_name, t in tests.items() -%}
 def {{t_name}}():
