@@ -1,5 +1,5 @@
 ## ParserKiosk: A Proof of Concept multi-lingual test generation suite intended for parsers
-
+[![Coverage Status](https://coveralls.io/repos/github/R9295/parserkiosk/badge.svg)](https://coveralls.io/github/R9295/parserkiosk)
 ![](https://img.shields.io/github/commit-activity/w/R9295/parserkiosk?style=flat-square)
 ![](https://img.shields.io/github/issues/R9295/parserkiosk?style=flat-square)
 ![](https://img.shields.io/pypi/v/parserkiosk?style=flat-square)
