@@ -34,7 +34,7 @@ jobs:
         run: poetry install --no-interaction --no-root
       
       - name: run tests
-        run: ./runtests.sh
+        run: ./ci_runtests.sh
 
       - name: upload coverage
         uses: coverallsapp/github-action@master
