@@ -73,6 +73,7 @@ def generate_test(
                     ),
                     import_string=config.import_string,
                     assert_funcs=config.assert_functions,
+                    is_dict=lambda x: isinstance(x, Box),
                 )
             )
     except FileNotFoundError:

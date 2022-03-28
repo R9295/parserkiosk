@@ -1,6 +1,7 @@
 import pytest
+
 {{ import_string }}
-from .commons import (
+from .commons import (  # isort: skip
     {% for func in assert_funcs -%}
     {{ func }},
     {% endfor %}
@@ -21,16 +22,28 @@ def {{t_name}}():
     {%- elif t.input.type == "str" %}
     data = "{{ t.input.arg }}"
     {%- endif %}
+    {%- if is_dict(t.assert.arg) == True %}
+    {%- if t.assert.arg.type == "file" %}
+    with open('fixtures/{{t.assert.arg.arg}}', 'rb') as file:
+        expected = file.read()
+    {%- elif t.assert.arg.type == "raw" %}
+    expected = {{ t.assert.arg.arg }}
+    {%- elif t.assert.arg.type == "str" %}
+    expected = "{{ t.assert.arg.arg }}"
+    {%- endif %}
+    {%- elif t.assert.func != "fail" %}
+    expected = {{ t.assert.arg }}
+    {%- endif %}
     {% if t.assert.func != "fail" -%}
     serialized_data = {{func}}(data)
-    assert {{ t.assert.func }}(serialized_data, {{ t.assert.arg }})
+    assert {{ t.assert.func }}(serialized_data, expected)
     {% else -%}
     try:
         serialized_data = {{ func }}(data)
         pytest.fail()
     except Exception as e:
         {%- if t.assert.get('arg') != None %}
-       assert str(e) == '{{t.assert.arg}}'
+       assert str(e) == expected
         {% else %}
         pass
         {% endif %}

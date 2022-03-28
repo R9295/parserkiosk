@@ -1,10 +1,12 @@
 {{ import_string }}
 import {
+
     {% for func in assert_funcs -%}
     {{ func }},
     {% endfor %}
 } from './commons';
-import { readFileSync } from 'fs';
+import 'fs'
+import { readFileSync }
 
 {% for t_name, t in tests.items() %}
 it('{{t.info}}', () => {
@@ -15,16 +17,27 @@ it('{{t.info}}', () => {
     {%- elif t.input.type == "str" %}
     data = "{{ t.input.arg }}"
     {%- endif %}
+    {%- if is_dict(t.assert.arg) == True %}
+    {%- if t.assert.arg.type == "file" %}
+    expected = readFileSync("fixtures/{{t.assert.arg.arg}}", "utf-8")
+    {%- elif t.assert.arg.type == "raw" %}
+    expected = {{ t.assert.arg.arg }}
+    {%- elif t.assert.arg.type == "str" %}
+    expected = "{{ t.assert.arg.arg }}"
+    {%- endif %}
+    {%- elif t.assert.func != "fail" %}
+    expected = {{ t.assert.arg }}
+    {%- endif %}
     {% if t.assert.func != "fail" -%}
     serialized_data = {{func}}(data)
-    expect({{ t.assert.func }}(serialized_data, {{ t.assert.arg }})).toBe(true)
+    expect({{ t.assert.func }}(serialized_data, expected)).toBe(true)
     {%- else -%}
     try {
         serialized_data = {{ func }}(data)
         fail("Expected an error, but didn't get")
     } catch(e){
         {%- if t.assert.get('arg') != None %}
-        expect(e.toString()).toBe({{t.assert.arg}})
+        expect(e.toString()).toBe(expected)
         {% endif %}
     }
     {%- endif %}
