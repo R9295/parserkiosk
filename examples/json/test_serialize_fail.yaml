@@ -5,64 +5,64 @@
       test_array_no_comma:
           info: "Should not parse an array with multiple entries with no comma separation"
           input:
-            type: "raw"
-            arg: '"[1 true]"'
+            type: "str"
+            arg: '[1 true]'
           assert:
             func: "fail"
       test_array_invalid_utf8:
           info: "Should not parse illegal unicode in an array"
           input:
-            type: "raw"
-            arg: '"[a�]"'
+            type: "str"
+            arg: '[a�]'
           assert:
             func: "fail"
       test_array_just_minus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-]"'
+              type: "str"
+              arg: "[-]"
           assert:
               func: "fail"
       test_object_bracket_key:
           info: "Should not parse a bracket used as object key"
           input:
-              type: "raw"
-              arg: '"{[: \"x\"}\n"'
+              type: "str"
+              arg: '{[: \"x\"}'
           assert:
               func: "fail"
       test_object_two_commas_in_a_row:
           info: "Should not parse two commas in a row in an object"
           input:
-              type: "raw"
-              arg: "'{\"a\":\"\",,\"c\":\"d\"}'"
+              type: "str"
+              arg: '{\"a\":\"\",,\"c\":\"d\"}'
           assert:
               func: "fail"
       test_number_2_e_three:
           info: ""
           input:
-              type: "raw"
-              arg: '"[2.e-3]"'
+              type: "str"
+              arg: "[2.e-3]"
           assert:
               func: "fail"
       test_number_1_0_e:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1.0e-]"'
+              type: "str"
+              arg: "[1.0e-]"
           assert:
               func: "fail"
       test_structure_ascii_unicode_identifier:
           info: ""
           input:
-              type: "raw"
-              arg: '"a\xc3\xa5"'
+              type: "str"
+              arg: "a\xc3\xa5"
           assert:
               func: "fail"
       test_structure_whitespace_formfeed:
         info: "" 
         input:
-              type: "raw"
-              arg: '"[\x0c]"'
+              type: "str"
+              arg: "[\x0c]"
         assert:
               func: "fail"
       test_object_lone_continuation_byte_in_key_and_trailing_comma:
@@ -75,36 +75,36 @@
       test_structure_no_data:
           info: ""
           input:
-              type: "raw"
-              arg: '""'
+              type: "str"
+              arg: ""
           assert:
               func: "fail"
       test_number_1eE2:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1eE2]"'
+              type: "str"
+              arg: "[1eE2]"
           assert:
               func: "fail"
       test_number_0_capital_E_plus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0E+]"'
+              type: "str"
+              arg: "[0E+]"
           assert:
               func: "fail"
       test_number_minus_space_1:
           info: ""
           input:
-              type: "raw"
-              arg: '"[- 1]"'
+              type: "str"
+              arg: "[- 1]"
           assert:
               func: "fail"
       test_structure_angle_bracket_dot:
           info: ""
           input:
-              type: "raw"
-              arg: '"<.>"'
+              type: "str"
+              arg: "<.>"
           assert:
               func: "fail"
       test_structure_unclosed_object:
@@ -124,29 +124,29 @@
       test_incomplete_false:
           info: ""
           input:
-              type: "raw"
-              arg: '"[fals]"'
+              type: "str"
+              arg: "[fals]"
           assert:
               func: "fail"
       test_number_with_alpha_char:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1.8011670033376514H-308]"'
+              type: "str"
+              arg: "[1.8011670033376514H-308]"
           assert:
               func: "fail"
       test_number_with_alpha:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1.2a-3]"'
+              type: "str"
+              arg: "[1.2a-3]"
           assert:
               func: "fail"
       test_number_minus_infinity:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-Infinity]"'
+              type: "str"
+              arg: "[-Infinity]"
           assert:
               func: "fail"
       test_string_escaped_emoji:
@@ -166,78 +166,78 @@
       test_single_space:
           info: ""
           input:
-              type: "raw"
-              arg: '" "'
+              type: "str"
+              arg: " "
           assert:
               func: "fail"
       test_structure_open_array_object:
           info: ""
           input:
-              type: "raw"
-              arg: '""'
+              type: "str"
+              arg: ""
           assert:
               func: "fail"
       test_structure_array_trailing_garbage:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1]x"'
+              type: "str"
+              arg: "[1]x"
           assert:
               func: "fail"
       test_number_hex_1_digit:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0x1]"'
+              type: "str"
+              arg: "[0x1]"
           assert:
               func: "fail"
       test_incomplete_true:
           info: ""
           input:
-              type: "raw"
-              arg: '"[tru]"'
+              type: "str"
+              arg: "[tru]"
           assert:
               func: "fail"
       test_number_real_without_fractional_part:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1.]"'
+              type: "str"
+              arg: "[1.]"
           assert:
               func: "fail"
       test_number_1_dot_0e:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1.0e]"'
+              type: "str"
+              arg: "[1.0e]"
           assert:
               func: "fail"
       test_number_0_1_2:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0.1.2]"'
+              type: "str"
+              arg: "[0.1.2]"
           assert:
               func: "fail"
       test_string_unescaped_newline:
           info: ""
           input:
-              type: "raw"
-              arg: '"[\"new\nline]"'
+              type: "file"
+              arg: "n_string_unescaped_newline.json"
           assert:
               func: "fail"
       test_structure_nullbyte_outside_string:
           info: ""
           input:
-              type: "raw"
-              arg: '"[\x00]"'
+              type: "str"
+              arg: "[\x00]"
           assert:
               func: "fail"
       test_structure_open_object_open_array:
           info: ""
           input:
-              type: "raw"
-              arg: '"{["'
+              type: "str"
+              arg: "{["
           assert:
               func: "fail"
       test_object_trailing_comment_slash_open_incomplete:
@@ -257,22 +257,22 @@
       test_structure_unclosed_array_unfinished_true:
           info: ""
           input:
-              type: "raw"
-              arg: '"[ false, tru"'
+              type: "str"
+              arg: "[ false, tru"
           assert:
               func: "fail"
       test_structure_angle_bracket_null:
           info: ""
           input:
-              type: "raw"
-              arg: '"[<null>]"'
+              type: "str"
+              arg: "[<null>]"
           assert:
               func: "fail"
       test_number_2_dot_e3:
           info: ""
           input:
-              type: "raw"
-              arg: '"[2.e3]"'
+              type: "str"
+              arg: "[2.e3]"
           assert:
               func: "fail"
       test_string_escaped_ctrl_char_tab:
@@ -285,15 +285,15 @@
       test_structure_open_object:
           info: ""
           input:
-              type: "raw"
-              arg: '"{"'
+              type: "str"
+              arg: "{"
           assert:
               func: "fail"
       test_object_repeated_null_null:
           info: ""
           input:
-              type: "raw"
-              arg: '"{null:null,null:null}"'
+              type: "str"
+              arg: "{null:null,null:null}"
           assert:
               func: "fail"
       test_string_single_quote:
@@ -334,22 +334,22 @@
       test_array_unclosed:
           info: ""
           input:
-              type: "raw"
-              arg: '"["'
+              type: "str"
+              arg: "["
           assert:
               func: "fail"
       test_structure_end_array:
           info: ""
           input:
-              type: "raw"
-              arg: '"]"'
+              type: "str"
+              arg: "]"
           assert:
               func: "fail"
       test_structure_open_array_open_object:
           info: ""
           input:
-              type: "raw"
-              arg: '"[{"'
+              type: "str"
+              arg: "[{"
           assert:
               func: "fail"
       test_string_invalid_unicode_escape:
@@ -362,15 +362,15 @@
       test_number_infinity:
           info: ""
           input:
-              type: "raw"
-              arg: '"[Infinity]"'
+              type: "str"
+              arg: "[Infinity]"
           assert:
               func: "fail"
       test_structure_lone_open_bracket:
           info: ""
           input:
-              type: "raw"
-              arg: '"["'
+              type: "str"
+              arg: "["
           assert:
               func: "fail"
       test_object_unterminated_value:
@@ -390,15 +390,15 @@
       test_number_neg_int_starting_with_zero:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-012]"'
+              type: "str"
+              arg: "[-012]"
           assert:
               func: "fail"
       test_number__dash_1_0_dot:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-1.0.]"'
+              type: "str"
+              arg: "[-1.0.]"
           assert:
               func: "fail"
       test_object_missing_semicolon:
@@ -418,22 +418,22 @@
       test_structure_capitalized_True:
           info: ""
           input:
-              type: "raw"
-              arg: '"[True]"'
+              type: "str"
+              arg: "[True]"
           assert:
               func: "fail"
       test_structure_whitespace_U_plus_2060_word_joiner:
           info: ""
           input:
-              type: "raw"
-              arg: '"[\xe2\x81\xa0]"'
+              type: "str"
+              arg: "[\xe2\x81\xa0]"
           assert:
               func: "fail"
       test_array_number_and_several_commas:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1,,]"'
+              type: "str"
+              arg: "[1,,]"
           assert:
               func: "fail"
       test_object_several_trailing_commas:
@@ -446,36 +446,36 @@
       test_structure_double_array:
           info: ""
           input:
-              type: "raw"
-              arg: '"[][]"'
+              type: "str"
+              arg: "[][]"
           assert:
               func: "fail"
       test_number_with_leading_zero:
           info: ""
           input:
-              type: "raw"
-              arg: '"[012]"'
+              type: "str"
+              arg: "[012]"
           assert:
               func: "fail"
       test_number_NaN:
           info: ""
           input:
-              type: "raw"
-              arg: '"[NaN]"'
+              type: "str"
+              arg: "[NaN]"
           assert:
               func: "fail"
       test_array_unclosed_with_object_inside:
           info: ""
           input:
-              type: "raw"
-              arg: '"[{}"'
+              type: "str"
+              arg: "[{}"
           assert:
               func: "fail"
       test_number_0_dot_3e_plus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0.3e+]"'
+              type: "str"
+              arg: "[0.3e+]"
           assert:
               func: "fail"
       test_string_unescaped_ctrl_char:
@@ -488,15 +488,15 @@
       test_structure_single_star:
           info: ""
           input:
-              type: "raw"
-              arg: '"*"'
+              type: "str"
+              arg: "*"
           assert:
               func: "fail"
       test_number_minus_01:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-01]"'
+              type: "str"
+              arg: "[-01]"
           assert:
               func: "fail"
       test_structure_object_with_trailing_garbage:
@@ -509,8 +509,8 @@
       test_number_0e_plpus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0e+]"'
+              type: "str"
+              arg: "[0e+]"
           assert:
               func: "fail"
       test_structure_unescaped_LF_before_string:
@@ -537,8 +537,8 @@
       test_array_double_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1,,2]"'
+              type: "str"
+              arg: "[1,,2]"
           assert:
               func: "fail"
       test_structure_open_array_string:
@@ -565,8 +565,8 @@
       test_number_minus_sign_with_trailing_garbage:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-foo]"'
+              type: "str"
+              arg: "[-foo]"
           assert:
               func: "fail"
       test_object_missing_value:
@@ -579,22 +579,22 @@
       test_structure_array_with_extra_array_close:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1]]"'
+              type: "str"
+              arg: "[1]]"
           assert:
               func: "fail"
       test_structure_100000_opening_arrays:
           info: ""
           input:
-              type: "raw"
-              arg: '""'
+              type: "str"
+              arg: ""
           assert:
               func: "fail"
       test_number_plus_1:
           info: ""
           input:
-              type: "raw"
-              arg: '"[+1]"'
+              type: "str"
+              arg: "[+1]"
           assert:
               func: "fail"
       test_string_backslash_00:
@@ -607,22 +607,22 @@
       test_structure_close_unopened_array:
           info: ""
           input:
-              type: "raw"
-              arg: '"1]"'
+              type: "str"
+              arg: "1]"
           assert:
               func: "fail"
       test_array_1_true_without_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1 true]"'
+              type: "str"
+              arg: "[1 true]"
           assert:
               func: "fail"
       test_object_emoji:
           info: ""
           input:
-              type: "raw"
-              arg: '"{\xf0\x9f\x87\xa8\xf0\x9f\x87\xad}"'
+              type: "str"
+              arg: "{\xf0\x9f\x87\xa8\xf0\x9f\x87\xad}"
           assert:
               func: "fail"
       test_structure_UTF8_BOM_no_data:
@@ -635,15 +635,15 @@
       test_array_comma_and_number:
           info: ""
           input:
-              type: "raw"
-              arg: '"[,1]"'
+              type: "str"
+              arg: "[,1]"
           assert:
               func: "fail"
       test_number_invalid_negative_real:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-123.123foo]"'
+              type: "str"
+              arg: "[-123.123foo]"
           assert:
               func: "fail"
       test_string_with_trailing_garbage:
@@ -670,15 +670,15 @@
       test_array_incomplete_invalid_value:
           info: ""
           input:
-              type: "raw"
-              arg: '"[x"'
+              type: "str"
+              arg: "[x"
           assert:
               func: "fail"
       test_structure_unclosed_array:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1"'
+              type: "str"
+              arg: "[1"
           assert:
               func: "fail"
       test_object_trailing_comment:
@@ -698,22 +698,22 @@
       test_number_plus_plus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[++1234]"'
+              type: "str"
+              arg: "[++1234]"
           assert:
               func: "fail"
       test_structure_unicode_identifier:
           info: ""
           input:
-              type: "raw"
-              arg: '"\xc3\xa5"'
+              type: "str"
+              arg: "\xc3\xa5"
           assert:
               func: "fail"
       test_array_a_invalid_utf8:
           info: ""
           input:
-              type: "raw"
-              arg: '"[a\xe5]"'
+              type: "str"
+              arg: "[a\xe5]"
           assert:
               func: "fail"
       test_array_double_extra_comma:
@@ -726,8 +726,8 @@
       test_structure_open_object_close_array:
           info: ""
           input:
-              type: "raw"
-              arg: '"{]"'
+              type: "str"
+              arg: "{]"
           assert:
               func: "fail"
       test_string_1_surrogate_then_escape_u1x:
@@ -747,15 +747,15 @@
       test_string_accentuated_char_no_quotes:
           info: ""
           input:
-              type: "raw"
-              arg: '"[\xc3\xa9]"'
+              type: "str"
+              arg: "[\xc3\xa9]"
           assert:
               func: "fail"
       test_object_missing_key:
           info: ""
           input:
-              type: "raw"
-              arg: '"{:""}"'
+              type: "str"
+              arg: '{:\"\"}'
           assert:
               func: "fail"
       test_string_incomplete_surrogate_escape_invalid:
@@ -768,8 +768,8 @@
       test_number_9_e_plus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[9.e+]"'
+              type: "str"
+              arg: "[9.e+]"
           assert:
               func: "fail"
       test_string_unicode_CapitalU:
@@ -782,8 +782,8 @@
       test_string_single_string_no_double_quotes:
           info: ""
           input:
-              type: "raw"
-              arg: '"ac"'
+              type: "str"
+              arg: "ac"
           assert:
               func: "fail"
       test_string_invalid_utf8_after_escape:
@@ -796,50 +796,50 @@
       test_array_number_and_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1,]"'
+              type: "str"
+              arg: '[1,]'
           assert:
               func: "fail"
       test_number_Inf:
           info: ""
           input:
-              type: "raw"
-              arg: '"[Inf]"'
+              type: "str"
+              arg: "[Inf]"
           assert:
               func: "fail"
       test_number_2_e_plus_3:
           info: ""
           input:
-              type: "raw"
-              arg: '"[2.e+3]"'
+              type: "str"
+              arg: "[2.e+3]"
           assert:
               func: "fail"
       test_number_neg_real_without_int_part:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-.123]"'
+              type: "str"
+              arg: "[-.123]"
           assert:
               func: "fail"
       test_array_colon_instead_of_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"["": 1]"'
+              type: "str"
+              arg: '[\"\": 1]'
           assert:
               func: "fail"
       test_array_invalid_utf8:
           info: ""
           input:
-              type: "raw"
-              arg: '"[\xff]"'
+              type: "str"
+              arg: "[\xff]"
           assert:
               func: "fail"
       test_number__plus_Inf:
           info: ""
           input:
-              type: "raw"
-              arg: '"[+Inf]"'
+              type: "str"
+              arg: "[+Inf]"
           assert:
               func: "fail"
       test_structure_incomplete_UTF8_BOM:
@@ -859,15 +859,15 @@
       test_array_unclosed_trailing_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1,"'
+              type: "str"
+              arg: "[1,"
           assert:
               func: "fail"
       test_structure_lone_invalid_utf_8:
           info: ""
           input:
-              type: "raw"
-              arg: '"\xe5"'
+              type: "str"
+              arg: "\xe5"
           assert:
               func: "fail"
       test_string_invalid_backslash_esc:
@@ -880,8 +880,8 @@
       test_structure_unclosed_array_unfinished_false:
           info: ""
           input:
-              type: "raw"
-              arg: '"[ true, fals"'
+              type: "str"
+              arg: "[ true, fals"
           assert:
               func: "fail"
       test_object_with_single_string:
@@ -894,15 +894,15 @@
       test_array_star_inside:
           info: ""
           input:
-              type: "raw"
-              arg: '"[*]"'
+              type: "str"
+              arg: "[*]"
           assert:
               func: "fail"
       test_multidigit_number_then_00:
           info: ""
           input:
-              type: "raw"
-              arg: '"123\x00"'
+              type: "str"
+              arg: "123\x00"
           assert:
               func: "fail"
       test_structure_object_with_comment:
@@ -915,8 +915,8 @@
       test_array_extra_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"["",]"'
+              type: "str"
+              arg: '[\"\",]'
           assert:
               func: "fail"
       test_string_leading_uescaped_thinspace:
@@ -929,22 +929,22 @@
       test_array_items_separated_by_semicolon:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1:2]"'
+              type: "str"
+              arg: "[1:2]"
           assert:
               func: "fail"
       test_object_unquoted_key:
           info: ""
           input:
-              type: "raw"
-              arg: '"{a: ""}"'
+              type: "str"
+              arg: '{a: \"\"}'
           assert:
               func: "fail"
       test_array_missing_value:
           info: ""
           input:
-              type: "raw"
-              arg: '"[   , ""]"'
+              type: "str"
+              arg: '[   , \"\"]'
           assert:
               func: "fail"
       test_array_incomplete:
@@ -957,43 +957,43 @@
       test_number_hex_2_digits:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0x42]"'
+              type: "str"
+              arg: "[0x42]"
           assert:
               func: "fail"
       test_object_non_string_key_but_huge_number_instead:
           info: ""
           input:
-              type: "raw"
-              arg: '"{9999E9999:1}"'
+              type: "str"
+              arg: "{9999E9999:1}"
           assert:
               func: "fail"
       test_structure_object_followed_by_closing_object:
           info: ""
           input:
-              type: "raw"
-              arg: '"{}}"'
+              type: "str"
+              arg: "{}}"
           assert:
               func: "fail"
       test_number_real_garbage_after_e:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1ea]"'
+              type: "str"
+              arg: "[1ea]"
           assert:
               func: "fail"
       test_number_0_3e:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0.3e]"'
+              type: "str"
+              arg: "[0.3e]"
           assert:
               func: "fail"
       test_number_invalid_utf_8_in_bigger_int:
           info: ""
           input:
-              type: "raw"
-              arg: '"[123\xe5]"'
+              type: "str"
+              arg: "[123\xe5]"
           assert:
               func: "fail"
       test_object_key_with_single_quotes:
@@ -1006,15 +1006,15 @@
       test_array_unclosed_with_new_lines:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1,\n1\n,1"'
+              type: "file"
+              arg: "n_array_unclosed_with_new_lines.json"
           assert:
               func: "fail"
       test_number_neg_with_garbage_at_end:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-1x]"'
+              type: "str"
+              arg: "[-1x]"
           assert:
               func: "fail"
       test_object_garbage_at_end:
@@ -1048,71 +1048,71 @@
       test_number_1_0e_plus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1.0e+]"'
+              type: "str"
+              arg: "[1.0e+]"
           assert:
               func: "fail"
       test_structure_open_array_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"[,"'
+              type: "str"
+              arg: "[,"
           assert:
               func: "fail"
       test_structure_open_object_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"{,"'
+              type: "str"
+              arg: "{,"
           assert:
               func: "fail"
       test_number_0_capital_E:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0E]"'
+              type: "str"
+              arg: "[0E]"
           assert:
               func: "fail"
       test_string_no_quotes_with_bad_escape:
           info: ""
           input:
-              type: "raw"
-              arg: '"[\\n]"'
+              type: "str"
+              arg: "[\\n]"
           assert:
               func: "fail"
       test_number_minus_NaN:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-NaN]"'
+              type: "str"
+              arg: "[-NaN]"
           assert:
               func: "fail"
-      test_number__minus_2_dot:
+      test_number_minus_2_dot:
           info: ""
           input:
-              type: "raw"
-              arg: '"[-2.]"'
+              type: "str"
+              arg: "[-2.]"
           assert:
               func: "fail"
       test_number_invalid_utf_8_in_int:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0\xe5]\n"'
+              type: "file"
+              arg: "n_number_invalid_utf_8_in_int.json"
           assert:
               func: "fail"
       test_number_0_e1:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0.e1]"'
+              type: "str"
+              arg: "[0.e1]"
           assert:
               func: "fail"
       test_array_just_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"[,]"'
+              type: "str"
+              arg: "[,]"
           assert:
               func: "fail"
       test_object_missing_colon:
@@ -1125,43 +1125,43 @@
       test_number_starting_with_dot:
           info: ""
           input:
-              type: "raw"
-              arg: '"[.123]"'
+              type: "str"
+              arg: "[.123]"
           assert:
               func: "fail"
       test_structure_single_eacute:
           info: ""
           input:
-              type: "raw"
-              arg: '"\xe9"'
+              type: "str"
+              arg: "\xe9"
           assert:
               func: "fail"
       test_structure_unclosed_array_partial_null:
           info: ""
           input:
-              type: "raw"
-              arg: '"[ false, nul"'
+              type: "str"
+              arg: "[ false, nul"
           assert:
               func: "fail"
       test_number_expression:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1+2]"'
+              type: "str"
+              arg: "[1+2]"
           assert:
               func: "fail"
       test_number_real_with_invalid_utf8_after_e:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1e\xe5]"'
+              type: "str"
+              arg: "[1e\xe5]"
           assert:
               func: "fail"
       test_array_inner_array_no_comma:
           info: ""
           input:
-              type: "raw"
-              arg: '"[3[4]]"'
+              type: "str"
+              arg: "[3[4]]"
           assert:
               func: "fail"
       test_structure_array_with_unclosed_string:
@@ -1174,8 +1174,8 @@
       test_structure_number_with_trailing_garbage:
           info: ""
           input:
-              type: "raw"
-              arg: '"2@"'
+              type: "str"
+              arg: "2@"
           assert:
               func: "fail"
       test_string_invalid_utf8_in_escape:
@@ -1188,8 +1188,8 @@
       test_number_1_000:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1 000.0]"'
+              type: "str"
+              arg: "[1 000.0]"
           assert:
               func: "fail"
       test_string_escaped_backslash_bad:
@@ -1209,8 +1209,8 @@
       test_structure_object_unclosed_no_value:
           info: ""
           input:
-              type: "raw"
-              arg: '"{"":"'
+              type: "str"
+              arg: '{\"\":'
           assert:
               func: "fail"
       test_string_incomplete_escape:
@@ -1223,15 +1223,15 @@
       test_number_invalid_plus_minus:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0e+-1]"'
+              type: "str"
+              arg: "[0e+-1]"
           assert:
               func: "fail"
       test_array_comma_after_close:
           info: ""
           input:
-              type: "raw"
-              arg: '"[""],"'
+              type: "str"
+              arg: '[\"\"],'
           assert:
               func: "fail"
       test_string_start_escape_unclosed:
@@ -1244,15 +1244,15 @@
       test_structure_U_plus_2060_word_joined:
           info: ""
           input:
-              type: "raw"
-              arg: '"[\xe2\x81\xa0]"'
+              type: "str"
+              arg: "[\xe2\x81\xa0]"
           assert:
               func: "fail"
       test_number_0e:
           info: ""
           input:
-              type: "raw"
-              arg: '"[0e]"'
+              type: "str"
+              arg: "[0e]"
           assert:
               func: "fail"
       test_structure_open_array_open_string:
@@ -1272,22 +1272,22 @@
       test_number__dot_2e_3:
           info: ""
           input:
-              type: "raw"
-              arg: '"[.2e-3]"'
+              type: "str"
+              arg: "[.2e-3]"
           assert:
               func: "fail"
       test_number_invalid_utf_8_in_exponent:
           info: ""
           input:
-              type: "raw"
-              arg: '"[1e1\xe5]"'
+              type: "str"
+              arg: "[1e1\xe5]"
           assert:
               func: "fail"
       test_number__dot_minus_1:
           info: ""
           input:
-              type: "raw"
-              arg: '"[.-1]"'
+              type: "str"
+              arg: "[.-1]"
           assert:
               func: "fail"
       test_structure_open_open:
@@ -1314,8 +1314,8 @@
       test_incomplete_null:
           info: ""
           input:
-              type: "raw"
-              arg: '"[nul]"'
+              type: "str"
+              arg: "[nul]"
           assert:
               func: "fail"
       test_structure_trailing_hash:
@@ -1328,7 +1328,7 @@
       test_object_non_string_key:
           info: ""
           input:
-              type: "raw"
-              arg: '"{1:1}"'
+              type: "str"
+              arg: "{1:1}"
           assert:
               func: "fail"
