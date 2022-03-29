@@ -1,3 +1,18 @@
-### WIP
+### JSON RFC 8259
 
-I have only added tests that are supposed to fail for now. More to come
+1. Python
+``` bash
+$ pip install deepdiff parserkiosk
+$ parserkiosk . --builtin python
+$ cd tests
+$ pytest -s .
+```
+2. Node.js 
+``` bash
+$ pip install parserkiosk
+$ mv config.yaml python.config.yaml
+$ mv node.config.yaml config.yaml
+$ parserkiosk . --builtin node_js
+$ cd tests
+$ npx jest .
+```
