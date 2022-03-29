@@ -16,3 +16,12 @@ $ parserkiosk . --builtin node_js
 $ cd tests
 $ npx jest .
 ```
+3. Others
+``` bash
+$ pip install parserkiosk
+$ mv config.yaml python.config.yaml
+$ vim config.yaml # write your own config
+$ parserkiosk . --path mytemplate.jinja2 --ext my.file.extension
+$ cd tests 
+# run the tests! You may need to adapt the files a little.
+```
