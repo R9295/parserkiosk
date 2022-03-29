@@ -1,6 +1,6 @@
 def assert_dict(a, b):
-    return True
-    #    return a == b
+    # to improve
+    return a == b
 
 
 def assert_list(a, b):

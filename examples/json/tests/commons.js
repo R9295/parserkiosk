@@ -1,14 +1,20 @@
+const assert = require('assert');
+
 const assert_dict = (a, b) => {
-    return true
+    try {       
+        assert.deepStrictEqual(a, b);
+        return true;
+    } catch (error) {
+        return false
 }
 
 const assert_list = (a, b) => {
-    results = a.map((item, index) => {
-        return (
-            item === b[index]
-        )
-    })
-    return results.every((item) => item === true)
+    try {       
+        assert.deepStrictEqual(a, b);
+        return true;
+    } catch (error) {
+        return false
+    }
 }
 
 const assert_float = (a, b) => {
