@@ -1,0 +1,22 @@
+const assert_dict = (a, b) => {
+    return true
+}
+
+const assert_list = (a, b) => {
+    results = a.map((item, index) => {
+        return (
+            item === b[index]
+        )
+    })
+    return results.every((item) => item === true)
+}
+
+const assert_float = (a, b) => {
+    return (
+        typeof a === "number" && typeof b === "number" && !Number.isInteger(a) && !Number.isInteger(b) && a === b
+    )
+}
+
+exports.assert_float = assert_float
+exports.assert_list = assert_list
+exports.assert_dict = assert_dict

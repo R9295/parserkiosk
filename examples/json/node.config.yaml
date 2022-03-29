@@ -1,0 +1,8 @@
+---
+serialize_function: "JSON.parse"
+de_serialize_function: "JSON.stringify"
+import_string: ""
+assert_functions:
+    - assert_dict
+    - assert_list
+    - assert_float

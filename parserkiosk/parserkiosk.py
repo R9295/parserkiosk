@@ -47,7 +47,8 @@ def get_template(path: str, is_builtin: bool) -> jinja2.Template:
 def get_ext(template_name: str) -> str:
     match template_name:
         case 'node_js':
-            return 'js'
+            # jest needs a .test prefix
+            return '.test.js'
         case 'python':
             return 'py'
         case _:
