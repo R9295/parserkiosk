@@ -229,8 +229,8 @@
       test_structure_nullbyte_outside_string:
           info: ""
           input:
-              type: "str"
-              arg: "[\x00]"
+              type: "file"
+              arg: "n_structure_nullbyte_outside_string"
           assert:
               func: "fail"
       test_structure_open_object_open_array:
@@ -425,8 +425,8 @@
       test_structure_whitespace_U_plus_2060_word_joiner:
           info: ""
           input:
-              type: "str"
-              arg: "[\xe2\x81\xa0]"
+              type: "file"
+              arg: "n_structure_whitespace_U_plus_2060_word_joiner.json"
           assert:
               func: "fail"
       test_array_number_and_several_commas:
@@ -622,7 +622,7 @@
           info: ""
           input:
               type: "str"
-              arg: "{\xf0\x9f\x87\xa8\xf0\x9f\x87\xad}"
+              arg: "n_object_emoji.json"
           assert:
               func: "fail"
       test_structure_UTF8_BOM_no_data:
@@ -901,8 +901,8 @@
       test_multidigit_number_then_00:
           info: ""
           input:
-              type: "str"
-              arg: "123\x00"
+              type: "file"
+              arg: "n_multidigit_number_then_00.json"
           assert:
               func: "fail"
       test_structure_object_with_comment:
