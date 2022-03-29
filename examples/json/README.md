@@ -13,7 +13,6 @@ $ pip install parserkiosk
 $ mv config.yaml python.config.yaml
 $ mv node.config.yaml config.yaml
 $ parserkiosk . --builtin node_js
-$ cd tests
 $ npx jest .
 ```
 3. Others
