@@ -11,9 +11,12 @@ exclude =
     *.toml
     *.yaml
     *.yml
+    *.json
     .flake8
     *.md
     *.sh
+    *.js
+    *.lua
     *.jinja2
     Dockerfile
     .gitignore

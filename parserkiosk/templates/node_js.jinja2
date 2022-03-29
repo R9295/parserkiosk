@@ -1,12 +1,10 @@
 {{ import_string }}
-import {
-
+const {
     {% for func in assert_funcs -%}
     {{ func }},
     {% endfor %}
-} from './commons';
-import 'fs'
-import { readFileSync }
+} = require('./commons');
+const { readFileSync } = require('fs');
 
 {% for t_name, t in tests.items() %}
 it('{{t.info}}', () => {
