@@ -4,6 +4,7 @@ def assert_dict(a, b):
 
 
 def assert_list(a, b):
+    # won't work with nested lists
     asserts = []
     assert len(a) == len(b)
     for index, item in enumerate(a):
