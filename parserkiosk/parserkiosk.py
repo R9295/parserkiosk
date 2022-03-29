@@ -48,7 +48,7 @@ def get_ext(template_name: str) -> str:
     match template_name:
         case 'node_js':
             # jest needs a .test prefix
-            return '.test.js'
+            return 'test.js'
         case 'python':
             return 'py'
         case _:

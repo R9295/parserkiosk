@@ -6,6 +6,7 @@ const assert_dict = (a, b) => {
         return true;
     } catch (error) {
         return false
+    }
 }
 
 const assert_list = (a, b) => {
