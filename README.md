@@ -3,7 +3,7 @@
 ![](https://img.shields.io/github/commit-activity/w/R9295/parserkiosk?style=flat-square)
 ![](https://img.shields.io/github/issues/R9295/parserkiosk?style=flat-square)
 ![](https://img.shields.io/pypi/v/parserkiosk?style=flat-square)
-![](https://pepy.tech/badge/parserkiosk)
+[![Downloads](https://pepy.tech/badge/parserkiosk/week)](https://pepy.tech/project/parserkiosk)
 ![](https://img.shields.io/pypi/format/parserkiosk?style=flat-square)
 ![](https://img.shields.io/badge/code%20style-black-000000.svg)
 
