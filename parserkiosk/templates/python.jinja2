@@ -26,7 +26,7 @@ def {{t_name}}():
     '''
     {%- endif -%}
     {{ input(t.input, 'data') }}
-    {%- if is_dict(t.assert.arg) is True %}
+    {%- if is_dict(t.assert.arg) is true %}
     {{ input(t.assert.arg, 'expected') }}
     {%- elif t.assert.get('arg') is not none %}
     expected = {{ t.assert.arg }}

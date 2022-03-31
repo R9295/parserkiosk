@@ -23,11 +23,12 @@ from typing import Dict, List, Union
 
 import jinja2
 import yamale
+from box import Box
 from yaml import load as load_yaml
 
 from .colors import print_error, print_success
 from .schema import config_schema, test_schema
-from .util import Box
+from .util import merge_dict
 
 try:
     from yaml import CLoader as YamlLoader
@@ -88,7 +89,9 @@ def read_yaml(filename, validation_schema=None) -> Box:
         if validation_schema:
             data = yamale.make_data(content=content)
             yamale.validate(validation_schema, data)
-    return Box(load_yaml(content, Loader=YamlLoader))
+            # returning yaml_dict from yamale internal rep.
+            return data[0][0]
+    return load_yaml(content, Loader=YamlLoader)
 
 
 def validate_cli_args(args) -> None:
@@ -121,13 +124,13 @@ def parse_tests(
             override_test_yaml = read_yaml(
                 test_file.replace('.yaml', '.override.yaml')
             )
-            test_yaml.merge(override_test_yaml)
+            merge_dict(test_yaml, override_test_yaml)
         try:
             yamale.validate(test_schema, [(test_yaml, test_file)])
             parsed_tests.append(
                 {
                     'name': test_file.split('/')[-1].replace('.yaml', ''),
-                    'tests': test_yaml,
+                    'tests': Box(test_yaml),
                 }
             )
         except yamale.YamaleError as e:
@@ -189,9 +192,11 @@ def main() -> None:
         args.builtin or args.path, args.builtin is not None
     )
     try:
-        config = read_yaml(
-            os.path.join(args.dir, 'config.yaml'),
-            config_schema,
+        config = Box(
+            read_yaml(
+                os.path.join(args.dir, 'config.yaml'),
+                config_schema,
+            )
         )
     except yamale.YamaleError as e:
         print_error('Error(s) in config.yaml:')
