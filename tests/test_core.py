@@ -113,6 +113,7 @@ assert_functions:
   - asdf
 ''',
     )
+    fs.create_file('test_asdf.yaml')
     # need to patch importlib as filesystem is faked so it won't find builtin template  # noqa E501
     with patch('importlib.resources.read_text') as patched_importlib:
         patched_importlib.return_value = '{{ import_string }}'
@@ -135,5 +136,4 @@ def test_invalid_test(fs, capsys):
         with patch('sys.argv', default_cli_args):
             parserkiosk.main()
             out = capsys.readouterr().out
-            assert 'Error(s) in ./test_asdf.yaml' in out
-            assert 'Error validating data' in out
+            assert 'Error validating data \'./test_asdf.yaml\'' in out

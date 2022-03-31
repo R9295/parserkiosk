@@ -7,7 +7,7 @@ TEMPLATE_NAME = 'node_js'
 
 def test_correct_ext_from_template():
     ext = parserkiosk.get_ext(TEMPLATE_NAME)
-    assert ext == 'js'
+    assert ext == 'test.js'
 
 
 def test_correct_template_from_path():
