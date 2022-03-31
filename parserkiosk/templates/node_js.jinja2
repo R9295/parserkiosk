@@ -6,32 +6,30 @@ const {
 } = require('./commons');
 const { readFileSync } = require('fs');
 
+{%- macro input(params, var_name) -%}
+    {%- if params.type == "file" -%}
+    const {{ var_name }} = readFileSync("fixtures/{{params.arg}}", "utf-8")
+    {%- elif params.type == "raw" -%}
+    const {{var_name}} = {{ params.arg }}
+    {%- elif params.type == "str" -%}
+    const {{ var_name }} = "{{ params.arg }}"
+    {%- endif -%}
+{%- endmacro %}
+
 {% for t_name, t in tests.items() %}
 it('{{t.info}}', () => {
-    {%- if t.input.type == "file" %}
-    data = readFileSync("fixtures/{{t.input.arg}}", "utf-8")
-    {%- elif t.input.type == "raw" %}
-    data = {{ t.input.arg }}
-    {%- elif t.input.type == "str" %}
-    data = "{{ t.input.arg }}"
-    {%- endif %}
+    {{ input(t.input, 'data') }}
     {%- if is_dict(t.assert.arg) == True %}
-    {%- if t.assert.arg.type == "file" %}
-    expected = readFileSync("fixtures/{{t.assert.arg.arg}}", "utf-8")
-    {%- elif t.assert.arg.type == "raw" %}
-    expected = {{ t.assert.arg.arg }}
-    {%- elif t.assert.arg.type == "str" %}
-    expected = "{{ t.assert.arg.arg }}"
-    {%- endif %}
-    {%- elif t.assert.func != "fail" %}
-    expected = {{ t.assert.arg }}
+    {{ input(t.input, 'expected') }}
+    {%- elif t.assert.get('arg') is not none %}
+    const expected = {{ t.assert.arg }}
     {%- endif %}
     {% if t.assert.func != "fail" -%}
-    serialized_data = {{func}}(data)
+    const serialized_data = {{func}}(data)
     expect({{ t.assert.func }}(serialized_data, expected)).toBe(true)
     {%- else -%}
     try {
-        serialized_data = {{ func }}(data)
+        const serialized_data = {{ func }}(data)
         fail("Expected an error, but didn't get")
     } catch(e){
         {%- if t.assert.get('arg') != None %}

@@ -7,31 +7,28 @@ from .commons import (  # isort: skip
     {% endfor %}
 )
 
+{%- macro input(params, var_name) -%}
+    {%- if params.type == "file" %}
+    with open('fixtures/{{params.arg}}', 'rb') as file:
+        {{ var_name }} = file.read()
+    {%- elif params.type == "raw" %}
+    {{var_name}} = {{ params.arg }}
+    {%- elif params.type == "str" %}
+    {{ var_name }} = "{{ params.arg }}"
+    {%- endif %}
+{%- endmacro %}
+
 {% for t_name, t in tests.items() -%}
 def {{t_name}}():
     {%- if t.info != '' %}
     '''
     {{t.info}}
     '''
-    {%- endif %}
-    {%- if t.input.type == "file" %}
-    with open('fixtures/{{t.input.arg}}', 'rb') as file:
-        data = file.read()
-    {%- elif t.input.type == "raw" %}
-    data = {{ t.input.arg }}
-    {%- elif t.input.type == "str" %}
-    data = "{{ t.input.arg }}"
-    {%- endif %}
-    {%- if is_dict(t.assert.arg) == True %}
-    {%- if t.assert.arg.type == "file" %}
-    with open('fixtures/{{t.assert.arg.arg}}', 'rb') as file:
-        expected = file.read()
-    {%- elif t.assert.arg.type == "raw" %}
-    expected = {{ t.assert.arg.arg }}
-    {%- elif t.assert.arg.type == "str" %}
-    expected = "{{ t.assert.arg.arg }}"
-    {%- endif %}
-    {%- elif t.assert.func != "fail" %}
+    {%- endif -%}
+    {{ input(t.input, 'data') }}
+    {%- if is_dict(t.assert.arg) is True %}
+    {{ input(t.assert.arg, 'expected') }}
+    {%- elif t.assert.get('arg') is not none %}
     expected = {{ t.assert.arg }}
     {%- endif %}
     {% if t.assert.func != "fail" -%}
