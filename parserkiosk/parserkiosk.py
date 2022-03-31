@@ -23,11 +23,11 @@ from typing import Dict, List, Union
 
 import jinja2
 import yamale
-from box import Box
 from yaml import load as load_yaml
 
 from .colors import print_error, print_success
 from .schema import config_schema, test_schema
+from .util import Box
 
 try:
     from yaml import CLoader as YamlLoader
@@ -108,18 +108,28 @@ def validate_cli_args(args) -> None:
 
 def parse_tests(
     tests: List[str],
+    override: bool,
 ) -> Union[None, List[Dict[str, Union[str, Box]]]]:
     parsed_tests = []
-    for test in tests:
+    for test_file in tests:
+        test_yaml = read_yaml(test_file)
+        if override and os.path.exists(
+            test_file.replace('.yaml', '.override.yaml')
+        ):
+            override_test_yaml = read_yaml(
+                test_file.replace('.yaml', '.override.yaml')
+            )
+            test_yaml.merge(override_test_yaml)
         try:
+            yamale.validate(test_schema, [(test_yaml, test_file)])
             parsed_tests.append(
                 {
-                    'name': test.split('/')[-1].replace('.yaml', ''),
-                    'tests': read_yaml(test, validation_schema=test_schema),
+                    'name': test_file.split('/')[-1].replace('.yaml', ''),
+                    'tests': test_yaml,
                 }
             )
         except yamale.YamaleError as e:
-            print_error(f'Error(s) in {test}:')
+            print_error(f'Error(s) in {test_file}:')
             print_error(str(e))
             return
     return parsed_tests
@@ -152,6 +162,12 @@ def main() -> None:
         required=False,
         help='Use a built-in templates: python(Python/pytest), node_js(Node.JS/jest).',  # noqa E501
     )
+    parser.add_argument(
+        '--override',
+        action='store_true',
+        required=False,
+        help='Allow overriding a test files',
+    )
     args = parser.parse_args()
     try:
         validate_cli_args(args)
@@ -160,6 +176,10 @@ def main() -> None:
         print_error(e)
         return
     test_files = glob.glob(f'{args.dir}/test_*.yaml')
+    test_files = [file for file in test_files if '.override.yaml' not in file]
+    if len(test_files) == 0:
+        print('No test files found. in {args.dir}')
+        return
     template = get_template(
         args.builtin or args.path, args.builtin is not None
     )
@@ -172,7 +192,7 @@ def main() -> None:
         print_error('Error(s) in config.yaml:')
         print_error(str(e))
         return
-    if parsed_tests := parse_tests(test_files):
+    if parsed_tests := parse_tests(test_files, override=args.override):
         for test in parsed_tests:
             generate_test(
                 test.get('name'),
