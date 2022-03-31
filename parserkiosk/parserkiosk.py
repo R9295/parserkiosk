@@ -113,9 +113,11 @@ def parse_tests(
     parsed_tests = []
     for test_file in tests:
         test_yaml = read_yaml(test_file)
+        _is_overriden = False
         if override and os.path.exists(
             test_file.replace('.yaml', '.override.yaml')
         ):
+            _is_overriden = True
             override_test_yaml = read_yaml(
                 test_file.replace('.yaml', '.override.yaml')
             )
@@ -129,8 +131,11 @@ def parse_tests(
                 }
             )
         except yamale.YamaleError as e:
-            print_error(f'Error(s) in {test_file}:')
             print_error(str(e))
+            if _is_overriden:
+                print_error(
+                    'Note: The file is being overriden as you are using the --override option and a corresponding .override.yaml file exists'  # noqa E501
+                )
             return
     return parsed_tests
 
