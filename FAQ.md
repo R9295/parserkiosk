@@ -2,7 +2,7 @@
 
 Q. What if the internal representation's syntax is different in the target language?  
 A. You can use the ``--override`` option.  
-Let's say you had a ``test_serialize.yaml``:
+E. Let's say you had a ``test_serialize.yaml``:
 ``` yaml
 # test_serialize.yaml
 type: "SERIALIZE"
