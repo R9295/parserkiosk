@@ -19,7 +19,7 @@ const { readFileSync } = require('fs');
 {% for t_name, t in tests.items() %}
 it('{{t.info}}', () => {
     {{ input(t.input, 'data') }}
-    {%- if is_dict(t.assert.arg) == True %}
+    {%- if is_dict(t.assert.arg) is true %}
     {{ input(t.input, 'expected') }}
     {%- elif t.assert.get('arg') is not none %}
     const expected = {{ t.assert.arg }}
