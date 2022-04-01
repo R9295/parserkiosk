@@ -79,6 +79,9 @@ For more on this, see ```examples/json/```
 - [ ] Ruby
 - [ ] ...
 
+### FAQ
+#### See [FAQ](FAQ.md) 
+
 ### License
 All work is licensed under ```GPL-3.0``` excluding the example JSON test-suite which is licensed under ```MIT```
 
