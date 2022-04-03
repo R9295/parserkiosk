@@ -52,6 +52,8 @@ def get_ext(template_name: str) -> str:
             return 'test.js'
         case 'python':
             return 'py'
+        case 'ruby':
+            return 'rb'
         case _:
             raise Exception(f'Unsupported builtin template "{template_name}".')
 

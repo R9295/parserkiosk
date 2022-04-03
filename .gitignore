@@ -6,3 +6,8 @@ dist/*
 .publish
 .coverage
 htmlcov
+.bundle
+Gemfile.lock
+bin/
+ruby/
+luaunit.lua
