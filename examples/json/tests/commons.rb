@@ -1,11 +1,12 @@
+
 def assert_list(a, b)
-    true
+    a == b
 end
 
 def assert_dict(a, b)
-    true
+    a == b
 end
 
 def assert_float(a, b)
-    true
+    a == b
 end
