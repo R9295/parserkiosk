@@ -20,6 +20,8 @@ $ npx jest
 ``` bash
 $ pip install parserkiosk
 $ bundle install
+# we need to override some tests cause of ruby syntax (eg. None == nil)
+$ cp ./test_serialize_succ_ruby.override.yaml test_serialize_succ.override.yaml
 $ mv config.yaml python.config.yaml
 $ mv ruby.config.yaml config.yaml
 $ parserkiosk . --builtin ruby
