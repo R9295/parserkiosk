@@ -7,11 +7,12 @@ require_relative 'commons'
     {{ var_name }} = file.read
     file.close
     {%- elif params.type == "raw" -%}
-    {{var_name}} = {{ params.arg }}
+    {{ var_name }} = {{ params.arg }}
     {%- elif params.type == "str" -%}
     {{ var_name }} = "{{ params.arg }}"
     {%- endif -%}
 {%- endmacro %}
+
 describe "" do
     {% for t_name, t in tests.items() %}
     it "{{ t_name }}" do
@@ -25,12 +26,12 @@ describe "" do
         serialized_data = {{func}}(data)
         expect({{ t.assert.func }}(serialized_data, expected)).to eql(true)
         {%- else -%}
-        {%- if t.assert.get('arg') != None -%}
+        {%- if t.assert.get('arg') is not none -%}
         expect { serialized_data = {{func}}(data) }.to raise_exception(expected)
         {%- else -%}
         expect { serialized_data = {{func}}(data) }.to raise_exception
         {%- endif %}
     {%- endif %}
     end
-    {% endfor %}
+    {%- endfor %}
 end
