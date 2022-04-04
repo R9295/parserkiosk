@@ -11,3 +11,4 @@ Gemfile.lock
 bin/
 ruby/
 luaunit.lua
+examples/json/tests/test_*
