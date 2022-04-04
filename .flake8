@@ -16,6 +16,8 @@ exclude =
     *.md
     *.sh
     *.js
+    *.rb
+    Gemfile
     *.lua
     *.jinja2
     Dockerfile

@@ -1,0 +1,37 @@
+{{ import_string }}
+require_relative 'commons'
+
+{%- macro input(params, var_name) -%}
+    {%- if params.type == "file" -%}
+    file = File.open("fixtures/{{ params.arg }}")
+    {{ var_name }} = file.read
+    file.close
+    {%- elif params.type == "raw" -%}
+    {{ var_name }} = {{ params.arg }}
+    {%- elif params.type == "str" -%}
+    {{ var_name }} = "{{ params.arg }}"
+    {%- endif -%}
+{%- endmacro %}
+
+describe "" do
+    {% for t_name, t in tests.items() %}
+    it "{{ t_name }}" do
+        {{ input(t.input, 'data') }}
+        {%- if is_dict(t.assert.arg) is true %}
+        {{ input(t.input, 'expected') }}
+        {%- elif t.assert.get('arg') is not none %}
+        expected = {{ t.assert.arg }}
+        {%- endif %}
+        {% if t.assert.func != "fail" -%}
+        serialized_data = {{func}}(data)
+        expect({{ t.assert.func }}(serialized_data, expected)).to eql(true)
+        {%- else -%}
+        {%- if t.assert.get('arg') is not none -%}
+        expect { serialized_data = {{func}}(data) }.to raise_exception(expected)
+        {%- else -%}
+        expect { serialized_data = {{func}}(data) }.to raise_exception
+        {%- endif %}
+    {%- endif %}
+    end
+    {%- endfor %}
+end

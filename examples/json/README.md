@@ -16,7 +16,21 @@ $ parserkiosk . --builtin node_js
 $ cd tests
 $ npx jest
 ```
-3. Others
+3. Ruby
+``` bash
+$ pip install parserkiosk
+$ bundle install
+# we need to override some tests cause of ruby syntax (eg. None == nil)
+$ cp test_serialize_succ_ruby.override.yaml test_serialize_succ.override.yaml
+$ mv config.yaml python.config.yaml
+$ mv ruby.config.yaml config.yaml
+$ parserkiosk . --builtin ruby
+$ python make_ruby_tests.py # script to add "_spec" to test file names
+$ cd tests
+$ bundle exec rspec spec .
+```
+
+4. Others
 ``` bash
 $ pip install parserkiosk
 $ mv config.yaml python.config.yaml

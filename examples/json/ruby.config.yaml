@@ -1,0 +1,7 @@
+---
+serialize_function: "JSON.parse"
+de_serialize_function: "JSON.generate"
+import_string: "require 'json'"
+assert_functions:
+    - assert_dict
+    - assert_list
