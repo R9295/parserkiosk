@@ -10,6 +10,8 @@ $ pytest -s .
 2. Node.js 
 ``` bash
 $ pip install parserkiosk
+# we need to override some tests cause of ruby syntax (eg. None == null)
+$ cp test_serialize_succ_node.override.yaml test_serialize_succ.override.yaml
 $ mv config.yaml python.config.yaml
 $ mv node.config.yaml config.yaml
 $ parserkiosk . --builtin node_js

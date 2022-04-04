@@ -1,0 +1,27 @@
+---
+# exists mainly for internal values such as None, False and True
+tests:
+    test_array_heterogeneous:
+        assert:
+            arg: '[null, 1, "1", {}]'
+    test_structure_lonely_true:
+        assert:
+            arg: 'true'
+    test_structure_true_in_array:
+        assert:
+            arg: '[true]'
+    test_array_null:
+        assert:
+            arg: '[null]'
+    test_array_with_several_null:
+        assert:
+            arg: '[1, null, null, null, 2]'
+    test_structure_lonely_null:
+        assert:
+            arg: 'null'
+    test_array_false:
+        assert:
+            arg: '[false]'
+    test_structure_lonely_false:
+        assert:
+            arg: 'false'
