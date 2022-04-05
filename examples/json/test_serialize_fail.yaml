@@ -226,11 +226,11 @@
               arg: "n_string_unescaped_newline.json"
           assert:
               func: "fail"
-      test_structure_nullbyte_outside_string:
+      test_structure_null_byte_outside_string:
           info: ""
           input:
               type: "file"
-              arg: "n_structure_nullbyte_outside_string"
+              arg: "n_structure_null_byte_outside_string.json"
           assert:
               func: "fail"
       test_structure_open_object_open_array:
