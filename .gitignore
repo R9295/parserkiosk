@@ -9,6 +9,6 @@ htmlcov
 .bundle
 Gemfile.lock
 bin/
-ruby/
+ruby/ruby
 luaunit.lua
 examples/json/tests/test_*
