@@ -70,13 +70,12 @@ For more on this, see ```examples/json/```
 ### Languages supported
 - [x] Python / pytest / ``python``
 - [x] NodeJS / jest (sync) / ``node_js``
-- [ ] NodeJS / jest (async)
+- [ ] Ruby / rspec / ``ruby``
 - [ ] Lua 
 - [ ] Go
 - [ ] Java
 - [ ] PHP
 - [ ] Perl
-- [ ] Ruby
 - [ ] ...
 
 ### FAQ
