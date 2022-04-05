@@ -1,0 +1,789 @@
+---
+# test cases from https://github.com/nst/JSONTestSuite
+type: "SERIALIZE"
+tests:
+    test_object_long_strings:
+        info: ""
+        input:
+            type: "str"
+            arg: "''"
+        assert:
+            func: "assert_dict"
+            arg: "''"
+    test_string_unicodeEscapedBackslash:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicodeEscapedBackslash.json"
+        assert:
+            func: "assert_list"
+            arg: '["/"]'
+    test_number_int_with_exp:
+        info: ""
+        input:
+            type: "str"
+            arg: "[20e1]"
+        assert:
+            func: "assert_list"
+            arg: '[200.0]'
+    test_array_with_trailing_space:
+        info: ""
+        input:
+            type: "str"
+            arg: "[2] "
+        assert:
+            func: "assert_list"
+            arg: '[2]'
+    test_string_double_escape_a:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_double_escape_a.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_number_negative_one:
+        info: ""
+        input:
+            type: "str"
+            arg: "[-1]"
+        assert:
+            func: "assert_list"
+            arg: '[-1]'
+    test_number_real_capital_e:
+        info: ""
+        input:
+            type: "str"
+            arg: "[1E12]"
+        assert:
+            func: "assert_dict"
+            arg: "[1000000000000.0]"
+    test_number_real_capital_e_two:
+        info: ""
+        input:
+            type: "str"
+            arg: "[1E22]"
+        assert:
+            func: "assert_list"
+            arg: "[1e+22]"
+    test_string_allowed_escapes:
+        info: ""
+        input:
+            type: "file"
+            arg:  "y_string_allowed_escapes.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_string_allowed_escapes:
+        info: ""
+        input:
+            type: "file"
+            arg:  "y_string_allowed_escapes.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_structure_true_in_array:
+        info: ""
+        input:
+            type: "str"
+            arg: "[true]"
+        assert:
+            func: "assert_list"
+            arg: '[True]'
+    test_structure_lonely_negative_real:
+        info: ""
+        input:
+            type: "str"
+            arg: "-0.1"
+        assert:
+            func: "assert_float"
+            arg: '-0.1'
+    test_object_with_newlines:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_with_newlines.json"
+        assert:
+            func: "assert_dict"
+            arg: '{"a":"b"}'
+    test_string_unicode_U_plus_1FFFE_nonchar:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_U_plus_1FFFE_nonchar.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_string_nonCharacterInUTF_minus_8_U_plus10FFFF:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_nonCharacterInUTF_minus_8_U_plus10FFFF.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_number_real_exponent:
+        info: ""
+        input:
+            type: "str"
+            arg: "[123e45]"
+        assert:
+            func: "assert_list"
+            arg: "[1.23e+47]"
+    test_object_duplicated_key:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_duplicated_key.json"
+        assert:
+            func: "assert_dict"
+            arg: '{"a":"c"}'
+    test_object_basic:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_basic.json"
+        assert:
+            func: "assert_dict"
+            arg: '{"a":"b","a":"c"}'
+    test_string_last_surrogates_1_and_2:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_last_surrogates_1_and_2.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_number_real_pos_exponent:
+        info: ""
+        input:
+            type: "str"
+            arg: "[1e+2]"
+        assert:
+            func: "assert_float"
+            arg: '100.0'
+    test_string_unicode_U_plus_FFFE_nonchar:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_U_plus_FFFE_nonchar.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_string_uEscape:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_uEscape.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_string_two_byte_utf_8:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_two_byte_utf_8.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_string_in_array_with_leading_space:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_in_array_with_leading_space.json"
+        assert:
+            func: "assert_list"
+            arg: '["asd"]'
+    test_array_with_1_and_newline:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_array_with_1_and_newline.json"
+        assert:
+            func: "assert_list"
+            arg: '[1]'
+    test_number_real_capital_e_neg_exp:
+        info: ""
+        input:
+            type: "str"
+            arg: "[1E-2]"
+        assert:
+            func: "assert_list"
+            arg: '[0.01]'
+    test_string_escaped_control_character:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_escaped_control_character.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_array_with_leading_space:
+        info: ""
+        input:
+            type: "str"
+            arg: " [1]"
+        assert:
+            func: "assert_list"
+            arg: '[1]'
+    test_string_one_byte_utf_8:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_one_byte_utf_8.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_number_real_fraction_exponent:
+        info: ""
+        input:
+            type: "str"
+            arg: "[123.456e78]"
+        assert:
+            func: "assert_list"
+            arg: '[1.23456e+80]'
+    test_object_extreme_numbers:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_extreme_numbers.json"
+        assert:
+            func: "assert_dict"
+            arg: '{"min": -1e+28, "max": 1e+28}'
+    test_object_duplicated_key_and_value:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_duplicated_key_and_value.json" 
+        assert:
+            func: "assert_dict"
+            arg: '{"a":"b"}' 
+    test_array_empty:
+        info: ""
+        input:
+            type: "str"
+            arg: "[]"
+        assert:
+            func: "assert_list"
+            arg: '[]'
+    test_array_heterogeneous:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_array_heterogeneous.json"
+        assert:
+            func: "assert_list"
+            arg: '[None, 1, "1", {}]'
+    test_number_double_close_to_zero:
+        info: ""
+        input:
+            type: "str"
+            arg: "[-0.000000000000000000000000000000000000000000000000000000000000000000000000000001]"
+        assert:
+            func: "assert_list"
+            arg: "[-1e-78]"
+    test_string_pi:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_pi.json"
+        assert:
+            func: "assert_list"
+            arg: '["π"]'
+    test_string_unicode_escaped_double_quote:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_escaped_double_quote.json"
+        assert:
+            func: "assert_list"
+            arg: "['\"']"
+    test_array_empty_string:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_array_empty_string.json"
+        assert:
+            func: "assert_list"
+            arg: '[""]'
+    test_array_false:
+        info: ""
+        input:
+            type: "str"
+            arg: "[false]"
+        assert:
+            func: "assert_list"
+            arg: '[False]'
+    test_string_unicode_U_plus_2064_invisible_plus:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_U_plus_2064_invisible_plus.json"
+        assert:
+            func: "assert_list"
+            arg: '["+"]'
+    test_object_string_unicode:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_string_unicode.json"
+        assert:
+            func: "assert_dict"
+            arg: '{}'
+    test_object_escaped_null_in_key:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_escaped_null_in_key.json"
+        assert:
+            func: "assert_dict"
+            arg: "{'foo\\x00bar': 42}"
+    test_string_simple_ascii:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_simple_ascii.json"
+        assert:
+            func: "assert_list"
+            arg: '["asd "]'
+    test_string_unicode_U_plus_FDD0_nonchar:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_U_plus_FDD0_nonchar.json"
+        assert:
+            func: "assert_dict"
+            arg: '["\ufdd0"]'
+    test_string_nonCharacterInUTF_8_U_plus_FFFF:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_nonCharacterInUTF_8_U_plus_FFFF.json"
+        assert:
+            func: "assert_list"
+            arg: '[""]'
+    test_number_0e_plus_1:
+        info: ""
+        input:
+            type: "str"
+            arg: "[0e+1]"
+        assert:
+            func: "assert_list"
+            arg: '[0.0]'
+    test_string_unescaped_char_delete:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unescaped_char_delete.json"
+        assert:
+            func: "assert_dict"
+            arg: '[""]'
+    test_number_real_capital_e_pos_exp:
+        info: ""
+        input:
+            type: "str"
+            arg: "[1E+2]"
+        assert:
+            func: "assert_dict"
+            arg: '[100.0]'
+    test_string_unicode_U_plus_200B_ZERO_WIDTH_SPACE:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_U_plus_200B_ZERO_WIDTH_SPACE.json"
+        assert:
+            func: "assert_dict"
+            arg: '["\u200b"]'
+    test_string_u_plus_2028_line_sep:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_u_plus_2028_line_sep.json"
+        assert:
+            func: "assert_dict"
+            arg: '[" "]'
+    test_string_accepted_surrogate_pair:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_accepted_surrogate_pair.json"
+        assert:
+            func: "assert_list"
+            arg: '["\udd1ea"]'
+    test_object_empty_key:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_empty_key.json"
+        assert:
+            func: "assert_dict"
+            arg: '{"":0}'
+    test_number_simple_real:
+        info: ""
+        input:
+            type: "str"
+            arg: "[123.456789]"
+        assert:
+            func: "assert_list"
+            arg: '[123.456789]'
+    test_string_uescaped_newline:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_uescaped_newline.json"
+        assert:
+            func: "assert_dict"
+            arg: "''"
+    test_string_backslash_doublequotes:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_backslash_doublequotes.json"
+        assert:
+            func: "assert_list"
+            arg: '["\""]'
+    test_object:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object.json"
+        assert:
+            func: "assert_dict"
+            arg: '{"asd":"sdf", "dfg":"fgh"}'
+    test_string_utf8:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_utf8.json"
+        assert:
+            func: "assert_list"
+            arg: '["€𝄞"]'
+    # ??
+    test_structure_string_empty:
+        info: ""
+        input:
+            type: "str"
+            arg: "''"
+        assert:
+            func: "assert_dict"
+            arg: '""'
+    test_string_null_escape:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_null_escape.json"
+        assert:
+            func: "assert_dict"
+            arg: '["\x00"]'
+    # ??
+    test_string_space:
+        info: ""
+        input:
+            type: "str"
+            arg: " "
+        assert:
+            func: "assert_dict"
+            arg: "''"
+    test_array_with_several_null:
+        info: ""
+        input:
+            type: "str"
+            arg: "[1,null,null,null,2]"
+        assert:
+            func: "assert_list"
+            arg: '[1, None, None, None, 2]'
+    test_number_negative_int:
+        info: ""
+        input:
+            type: "str"
+            arg: "[-123]"
+        assert:
+            func: "assert_list"
+            arg: '[-123]'
+    # ??
+    test_structure_lonely_false:
+        info: ""
+        input:
+            type: "str"
+            arg: "false"
+        assert:
+            func: "assert_dict"
+            arg: "False"
+    test_string_accepted_surrogate_pairs:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_accepted_surrogate_pairs.json"
+        assert:
+            func: "assert_list"
+            arg: '["😹💍"]'
+    test_string_three_byte_utf_8:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_three_byte_utf_8.json"
+        assert:
+            func: "assert_list"
+            arg: '[""]'
+    # ??
+    test_structure_lonely_null:
+        info: ""
+        input:
+            type: "str"
+            arg: "null"
+        assert:
+            func: "assert_dict"
+            arg: 'None'
+    # ??
+    test_structure_lonely_true:
+        info: ""
+        input:
+            type: "str"
+            arg: "true"
+        assert:
+            func: "assert_dict"
+            arg: 'True'
+    test_string_in_array:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_in_array.json"
+        assert:
+            func: "assert_list"
+            arg: '["asd"]'
+    test_string_unicode_U_plus_10FFFE_nonchar:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_U_plus_10FFFE_nonchar.json"
+        assert:
+            func: "assert_dict"
+            arg: "\"\""
+    test_string_unicode_2:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode_2.json"
+        assert:
+            func: "assert_list"
+            arg: '["⍂㈴⍂"]'
+    test_number:
+        info: ""
+        input:
+            type: "str"
+            arg: "[123e65]"
+        assert:
+            func: "assert_list"
+            arg: '[1.23e+67]'
+    test_array_null:
+        info: ""
+        input:
+            type: "str"
+            arg: "[null]"
+        assert:
+            func: "assert_list"
+            arg: '[None]'
+    test_string_double_escape_n:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_double_escape_n.json"
+        assert:
+            func: "assert_list"
+            arg: '["\n"]' 
+    # ??
+    test_structure_lonely_int:
+        info: ""
+        input:
+            type: "str"
+            arg: "42"
+        assert:
+            func: "assert_dict"
+            arg: '42'
+    test_string_backslash_and_u_escaped_zero:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_backslash_and_u_escaped_zero.json"
+        assert:
+            func: "assert_list"
+            arg: '["\x00"]'
+    test_string_escaped_noncharacter:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_escaped_noncharacter.json"
+        assert:
+            func: "assert_list"
+            arg: '["\uffff"]'
+    test_string_with_del_character:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_with_del_character.json"
+        assert:
+            func: "assert_dict"
+            arg: '["a\x7fa"]'
+    test_object_empty:
+        info: ""
+        input:
+            type: "str"
+            arg: "{}"
+        assert:
+            func: "assert_dict"
+            arg: '{}'
+    test_string_nbsp_uescaped:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_nbsp_uescaped.json"
+        assert:
+            func: "assert_list"
+            arg: '["new\xa0line"]'
+    test_string_reservedCharacterInUTF_8_U_plus_1BFFF:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_reservedCharacterInUTF_8_U_plus_1BFFF.json"
+        assert:
+            func: "assert_list"
+            arg: '["𛿿"]'
+    test_number_real_neg_exp:
+        info: ""
+        input:
+            type: "str"
+            arg: "[1e-2]"
+        assert:
+            func: "assert_list"
+            arg: '[0.01]'
+    test_string_1_2_3_bytes_UTF_8_sequences:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_1_2_3_bytes_UTF_8_sequences.json"
+        assert:
+            func: "assert_list"
+            arg: '["`Īካ"]'
+    test_array_arraysWithSpaces:
+        info: ""
+        input:
+            type: "str"
+            arg: "[[]   ]"
+        assert:
+            func: "assert_dict"
+            arg: '[[]]'
+    test_number_minus_zero:
+        info: ""
+        input:
+            type: "str"
+            arg: "[-0]"
+        assert:
+            func: "assert_list"
+            arg: '[0]'
+    test_structure_trailing_newline:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_structure_trailing_newline.json"
+        assert:
+            func: "assert_list"
+            arg: '["a"]'
+    test_string_surrogates_U_plus_MUSICAL_SYMBOL_G:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_surrogates_U_plus_1D11E_MUSICAL_SYMBOL_G_CLEF.json"
+        assert:
+            func: "assert_list"
+            arg: '["𝄞"]'
+    # WEIRD
+    test_structure_lonely_string:
+        info: ""
+        input:
+            type: "str"
+            arg: "asd"
+        assert:
+            func: "assert_dict"
+            arg: '"asd"'
+    test_structure_whitespace_array:
+        info: ""
+        input:
+            type: "str"
+            arg: " [] "
+        assert:
+            func: "assert_dict"
+            arg: '[]'
+    test_string_unicode:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_unicode.json"
+        assert:
+            func: "assert_list"
+            arg: '[]'
+                #arg: '["ꙭ'"]'"
+    test_number_0e1:
+        info: ""
+        input:
+            type: "str"
+            arg: "[0e1]"
+        assert:
+            func: "assert_list"
+            arg: '[0.0]'
+    test_object_simple:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_object_simple.json"
+        assert:
+            func: "assert_dict"
+            arg: '{"a":[]}'
+    test_array_ending_with_newline:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_array_ending_with_newline.json"
+        assert:
+            func: "assert_list"
+            arg: '["a"]'
+    test_string_u_plus_2029_par_sep:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_u_plus_2029_par_sep.json"
+        assert:
+            func: "assert_list"
+            arg: '[" "]' 
+    test_number_negative_zero:
+        info: ""
+        input:
+            type: "str"
+            arg: "[-0]"
+        assert:
+            func: "assert_list"
+            arg: '[0]'
+    test_number_after_space:
+        info: ""
+        input:
+            type: "str"
+            arg: "[ 4]"
+        assert:
+            func: "assert_list"
+            arg: '[4]'
+    test_number_simple_int:
+        info: ""
+        input:
+            type: "str"
+            arg: "[123]"
+        assert:
+            func: "assert_list"
+            arg: '[123]'
+    test_string_comments:
+        info: ""
+        input:
+            type: "file"
+            arg: "y_string_comments.json"
+        assert:
+            func: "assert_list"
+            arg: '["a/*b*/c/*d//e"]'
+                

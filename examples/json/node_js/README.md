@@ -1,0 +1,4 @@
+```
+$ cd tests
+$ npx jest .
+```
