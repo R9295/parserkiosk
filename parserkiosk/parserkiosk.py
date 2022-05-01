@@ -57,8 +57,19 @@ def get_ext(template_name: str) -> str:
         case 'php':
             # phpunit needs a .Test prefix
             return 'Test.php'
+        case 'go':
+            return 'go'
         case _:
             raise Exception(f'Unsupported builtin template "{template_name}".')
+
+
+def to_camel_case(string, first_letter_capital=True):
+    converted = ''
+    for item in string.split('_'):
+        converted += item.capitalize()
+    if not first_letter_capital:
+        converted[0] = converted[0].casefold()
+    return converted
 
 
 def generate_test(
@@ -79,6 +90,7 @@ def generate_test(
                         if tests.type == 'SERIALIZE'
                         else config.de_serialize_function
                     ),
+                    to_camel_case=to_camel_case,
                     import_string=config.import_string,
                     assert_funcs=config.assert_functions,
                     is_dict=lambda x: isinstance(x, Box),

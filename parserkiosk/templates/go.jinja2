@@ -1,0 +1,45 @@
+package main
+{{ import_string }}
+
+{%- macro input(params, var_name) -%}
+    {%- if params.type == "file" %}
+    {{ var_name }} := file_get_contents('fixtures/{{params.arg}}')
+    {%- elif params.type == "raw" %}
+    {{ var_name }} := {{ params.arg }}
+    {%- elif params.type == "str" %}
+    {{ var_name }} := "{{ params.arg }}"
+    {%- endif %}
+{%- endmacro %}
+
+{% for t_name, t in tests.items() %}
+func {{ to_camel_case(t_name) }}(t *testing.T) {
+    {%- if t.info != '' %}
+    /*
+        {{ t.info }}
+    */
+    {% endif -%}
+    {{ input(t.input, 'data') }}
+    {%- if is_dict(t.assert.arg) is true %}
+    {{ input(t.assert.arg, 'expected') }}
+    {%- elif t.assert.get('arg') is not none %}
+    expected := {{ t.assert.arg }}
+    {%- endif %}
+    {% if t.assert.func != "fail" -%}
+    serialized_data := {{func}}(data)
+    if {{ t.assert.func }}(serialized_data, expected) == false {
+        t.Error("Failed equality check")
+    }
+    {% else -%}
+    _, err := {{ func }}(data)
+    if err != nil {
+        {%- if t.assert.get('arg') != None %}
+        if err != expected {
+            t.Error("Expected error messages don't match")
+        }
+        {% endif %}
+    } else {
+        t.Error("Expected error, didn't get")
+    }
+    {% endif %}
+}
+{% endfor %}

@@ -3,7 +3,7 @@ import sys
 
 from parserkiosk import colors
 
-langs = ['python', 'node_js', 'ruby', 'php']
+langs = ['python', 'node_js', 'ruby', 'php', 'go']
 
 
 if __name__ == "__main__":
