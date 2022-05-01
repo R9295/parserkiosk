@@ -35,7 +35,7 @@ final class {{ filename }} extends TestCase {
             $this->fail("Did not raise Exception");
         } catch (Exception $e) {
             {%- if t.assert.get('arg') != None %}
-            $this->assertSame($expected, $e.__toString());
+            $this->assertSame($expected, $e.getMessage());
             {% endif %}
         }
         {% endif %}
