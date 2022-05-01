@@ -54,6 +54,9 @@ def get_ext(template_name: str) -> str:
             return 'py'
         case 'ruby':
             return 'rb'
+        case 'php':
+            # phpunit needs a .Test prefix
+            return 'Test.php'
         case _:
             raise Exception(f'Unsupported builtin template "{template_name}".')
 
@@ -70,6 +73,7 @@ def generate_test(
             test_file.write(
                 template.render(
                     tests=tests.tests,
+                    filename=filename,
                     func=(
                         config.serialize_function
                         if tests.type == 'SERIALIZE'

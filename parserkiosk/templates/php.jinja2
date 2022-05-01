@@ -1,0 +1,45 @@
+<?php
+use PHPUnit\Framework\TestCase;
+{{ import_string }}
+
+{%- macro input(params, var_name) -%}
+    {%- if params.type == "file" %}
+        ${{ var_name }} = file_get_contents('fixtures/{{params.arg}}');
+    {%- elif params.type == "raw" %}
+        ${{ var_name }} = {{ params.arg }};
+    {%- elif params.type == "str" %}
+        ${{ var_name }} = "{{ params.arg }}";
+    {%- endif %}
+{%- endmacro %}
+
+final class {{ filename }} extends TestCase {
+    {% for t_name, t in tests.items() %}
+    public function {{ t_name }}() {
+        {%- if t.info != '' %}
+        /*
+            {{ t.info }}
+        */
+        {% endif -%}
+        {{ input(t.input, 'data') }}
+        {%- if is_dict(t.assert.arg) is true %}
+        {{ input(t.assert.arg, 'expected') }}
+        {%- elif t.assert.get('arg') is not none %}
+        $expected = {{ t.assert.arg }};
+        {%- endif %}
+        {% if t.assert.func != "fail" -%}
+        $serialized_data = {{func}}($data);
+        $this->assertTrue({{ t.assert.func }}($serialized_data, $expected));
+        {% else -%}
+        try {
+            $serialized_data = {{ func }}($data);
+            $this->fail("Did not raise Exception");
+        } catch (Exception $e) {
+            {%- if t.assert.get('arg') != None %}
+            $this->assertSame($expected, $e.__toString());
+            {% endif %}
+        }
+        {% endif %}
+    }
+{% endfor %}
+}
+?>

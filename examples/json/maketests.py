@@ -3,7 +3,7 @@ import sys
 
 from parserkiosk import colors
 
-langs = ['python', 'node_js', 'ruby']
+langs = ['python', 'node_js', 'ruby', 'php']
 
 
 if __name__ == "__main__":
@@ -14,9 +14,10 @@ if __name__ == "__main__":
     else:
         lang = sys.argv[1]
         if lang not in langs:
-            colors.print_error(
-                'Language not supported. Supported: python, node_js, ruby'
-            )
+            colors.print_error('Language not supported')
+            colors.print_error('Supported:')
+            for lang in langs:
+                colors.print_error(lang)
         else:
             os.system(f'cp -r base {lang}/tests')
             os.system(f'cp test_serialize_succ.yaml {lang}/')
